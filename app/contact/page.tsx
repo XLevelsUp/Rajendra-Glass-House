@@ -5,7 +5,7 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 export default function ContactPage() {
   return (
-    <div className="bg-[#F8FAFC] min-h-screen pt-20">
+    <div className="bg-surface-body min-h-screen pt-20">
       
       {/* Hero */}
       <section className="py-24 border-b border-ink-200 text-center bg-white">
@@ -87,7 +87,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="text-ink-900 font-semibold mb-2">Working Hours</h3>
                     <p className="text-ink-600 font-medium text-sm">Mon - Sat: 9:30 AM - 7:30 PM</p>
-                    <p className="text-ink-400 font-medium text-sm mt-1">Sunday: Closed</p>
+                    <p className="text-ink-500 font-medium text-sm mt-1">Sunday: Closed</p>
                   </div>
                 </div>
               </div>
@@ -101,12 +101,12 @@ export default function ContactPage() {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label htmlFor="fullName" className="text-xs font-semibold tracking-wider text-ink-400 uppercase">Full Name</label>
+                      <label htmlFor="fullName" className="text-xs font-semibold tracking-wider text-ink-500 uppercase">Full Name</label>
                       <input 
                         id="fullName"
                         name="fullName"
                         type="text" 
-                        className="w-full bg-[#F8FAFC] border border-ink-200 rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all"
+                        className="w-full bg-surface-body border border-ink-200 rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all"
                         placeholder="John Doe"
                       />
                     </div>
@@ -116,7 +116,7 @@ export default function ContactPage() {
                         id="phoneNumber"
                         name="phoneNumber"
                         type="tel" 
-                        className="w-full bg-[#F8FAFC] border border-ink-200 rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all"
+                        className="w-full bg-surface-body border border-ink-200 rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all"
                         placeholder="+91 90000 00000"
                       />
                     </div>
@@ -135,7 +135,7 @@ export default function ContactPage() {
 
                   <button 
                     type="submit"
-                    className="w-full bg-gold text-white font-bold py-4 rounded-xl hover:bg-gold-dark hover:scale-105 transition-all shadow-md shadow-gold/20 mt-4 tracking-wide"
+                    className="w-full bg-gold text-ink-950 font-bold py-4 rounded-xl hover:bg-gold-dark hover:scale-105 transition-all shadow-md shadow-gold/20 mt-4 tracking-wide"
                   >
                     Submit Request
                   </button>
@@ -154,7 +154,7 @@ export default function ContactPage() {
       {/* Map Section */}
       <section className="h-[400px] w-full border-t border-ink-200">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m3!1d3916.326880010041!2d76.95179271533418!3d11.00747859216487!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859a72175e119%3A0xc3cfbe5349e29a9!2sRajendra%20Glass%20House!5e0!3m2!1sen!2sin!4v1684900000000!5m2!1sen!2sin" 
+          src="https://maps.google.com/maps?width=100%25&height=100%25&hl=en&q=Rajendra%20Glass%20House,%20Coimbatore&t=&z=15&ie=UTF8&iwloc=B&output=embed" 
           width="100%" 
           height="100%" 
           style={{ border: 0 }} 

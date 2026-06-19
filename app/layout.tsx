@@ -1,9 +1,13 @@
 import type { Metadata } from "next"
 import "./globals.css"
+import { Montserrat, Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/layout/ThemeProvider"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton"
+
+const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-heading" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-body" });
 
 
 import { SITE_NAME, BASE_URL, CONTACT_INFO, PHONE } from "@/lib/constants"
@@ -11,11 +15,11 @@ import { SITE_NAME, BASE_URL, CONTACT_INFO, PHONE } from "@/lib/constants"
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Rajendra Glass House | Premium Glass & Mirror Shop in Coimbatore",
+    default: "Rajendra Glass House | Saint Gobain Glass in Coimbatore – Toughened Glass, Mirrors & Glass Partitions in RS Puram",
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Rajendra Glass House – Coimbatore's #1 glass shop since 1977. Saint Gobain authorized dealer. Specialists in toughened glass, frameless shower enclosures, LED mirrors, glass railings, office partitions & more. RS Puram, Coimbatore.",
+    "Rajendra Glass House is Coimbatore's trusted glass shop near RS Puram, offering Saint Gobain glass, toughened glass, LED mirrors, shower enclosures, glass railings & partitions. As leading glass dealers in Coimbatore, call 098898 82014.",
   keywords: [
     "glass shop in Coimbatore",
     "toughened glass Coimbatore",
@@ -102,10 +106,8 @@ const schemaOrg = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${montserrat.variable} ${inter.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
@@ -118,10 +120,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           forcedTheme="dark"
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen flex-col bg-ink-950">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
+          <div className="flex min-h-screen flex-col bg-surface-body relative">
+            <div className="absolute inset-0 bg-noise pointer-events-none mix-blend-overlay z-0" />
+            <div className="relative z-10 flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
             <WhatsAppButton />
           </div>
         </ThemeProvider>

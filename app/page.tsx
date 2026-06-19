@@ -5,6 +5,7 @@ import { ProductsGrid } from "@/components/sections/ProductsGrid";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { ProjectGallery } from "@/components/sections/ProjectGallery";
 import { Testimonials } from "@/components/sections/Testimonials";
+import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
 import type { Metadata } from "next";
 
@@ -37,6 +38,7 @@ export default function HomePage() {
       <WhyChooseUs />
       <ProjectGallery />
       <Testimonials />
+      <FAQ />
       <CTASection />
     </>
   );

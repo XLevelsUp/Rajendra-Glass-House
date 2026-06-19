@@ -79,13 +79,14 @@ const testimonials = [
 
 export function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(1); // 1 for next, -1 for prev
+  const [direction, setDirection] = useState(1);
 
   useEffect(() => {
     const timer = setInterval(() => {
       handleNext();
-    }, 6000); // 6 seconds auto-rotate
+    }, 6000);
     return () => clearInterval(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex]);
 
   const handleNext = () => {
@@ -100,9 +101,9 @@ export function Testimonials() {
 
   const variants = {
     enter: (dir: number) => ({
-      x: dir > 0 ? 100 : -100,
+      x: dir > 0 ? 80 : -80,
       opacity: 0,
-      scale: 0.95,
+      scale: 0.97,
     }),
     center: {
       x: 0,
@@ -110,32 +111,38 @@ export function Testimonials() {
       scale: 1,
     },
     exit: (dir: number) => ({
-      x: dir < 0 ? 100 : -100,
+      x: dir < 0 ? 80 : -80,
       opacity: 0,
-      scale: 0.95,
+      scale: 0.97,
     }),
   };
 
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="py-28 bg-[#F8FAFC] border-t border-ink-200 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 text-center">
-        <AnimatedContainer className="mb-16">
-          <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">Testimonials</p>
-          <h2 className="font-serif text-4xl md:text-5xl text-ink-950 font-bold mb-6">Client Success Stories</h2>
-          <div className="inline-flex items-center gap-2 text-sm text-ink-700 bg-white border border-gold/30 shadow-sm px-5 py-2.5 rounded-full justify-center font-medium">
-            <svg className="w-4 h-4" viewBox="0 0 24 24">
+    <section className="py-28 bg-surface-body border-t border-ink-100 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-12 sm:px-14 md:px-10 text-center">
+
+        <AnimatedContainer className="mb-14">
+          <span className="section-kicker mb-4 block">Testimonials</span>
+          <h2 className="font-serif text-4xl md:text-5xl text-ink-950 font-bold mb-5 tracking-tight">
+            Client Success Stories
+          </h2>
+          <div className="gold-separator mx-auto mb-6" />
+
+          {/* Google rating badge */}
+          <div className="inline-flex items-center gap-2.5 text-sm text-ink-700 bg-white border border-ink-100 shadow-sm px-5 py-2.5 rounded-full justify-center font-semibold">
+            <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
               <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
               <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
               <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
             </svg>
-            4.9 · Google Reviews
+            <span>4.9 · Google Reviews</span>
           </div>
         </AnimatedContainer>
 
-        <div className="relative max-w-4xl mx-auto h-[550px] sm:h-[450px] md:h-[380px]">
+        <div className="relative max-w-4xl mx-auto">
           <AnimatePresence initial={false} custom={direction} mode="popLayout">
             <motion.div
               key={currentIndex}
@@ -144,61 +151,75 @@ export function Testimonials() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ x: { type: "spring", stiffness: 300, damping: 30 }, opacity: { duration: 0.3 } }}
-              className="absolute inset-0 w-full h-full"
+              transition={{ x: { type: "spring", stiffness: 320, damping: 32 }, opacity: { duration: 0.25 } }}
+              className="w-full"
             >
-              <div className="modern-glass rounded-3xl p-8 md:p-12 h-full flex flex-col items-center justify-center text-center">
+              <div className="bg-white border border-ink-100 rounded-3xl p-6 sm:p-8 md:p-12 h-full flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md transition-shadow duration-300">
+
+                {/* Stars */}
                 <div className="flex gap-1 mb-6">
                   {[...Array(5)].map((_, j) => (
-                    <Star key={j} className="w-5 h-5 fill-gold text-gold" />
+                    <Star key={j} className="w-4.5 h-4.5 fill-gold text-gold" size={18} />
                   ))}
                 </div>
-                <blockquote className="font-serif text-lg md:text-xl text-ink-950 italic leading-relaxed mb-8 flex-1 flex items-center justify-center">
+
+                {/* Quote */}
+                <blockquote className="font-serif text-base sm:text-lg md:text-xl text-ink-800 italic leading-relaxed mb-6 sm:mb-8 flex-1 flex items-center justify-center max-w-2xl">
                   <span>&ldquo;{currentTestimonial.text}&rdquo;</span>
                 </blockquote>
+
+                {/* Author */}
                 <div className="flex flex-col items-center mt-auto">
-                  <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold flex items-center justify-center text-gold text-sm font-bold mb-3 shadow-sm">
+                  <div className="w-12 h-12 rounded-full bg-gold/10 border-2 border-gold/30 flex items-center justify-center text-ink-950 text-sm font-bold mb-3 shadow-sm">
                     {currentTestimonial.initials}
                   </div>
-                  <div className="text-ink-900 font-semibold">{currentTestimonial.name}</div>
-                  <div className="text-ink-600 text-sm mt-1 font-medium">{currentTestimonial.role}</div>
+                  <div className="text-ink-900 font-bold text-sm tracking-wide">{currentTestimonial.name}</div>
+                  <div className="text-ink-600 text-xs mt-1 font-medium tracking-wider uppercase">{currentTestimonial.role}</div>
                 </div>
               </div>
             </motion.div>
           </AnimatePresence>
 
-          {/* Controls */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-2 md:-mx-16 pointer-events-none">
-            <button 
+          {/* Nav controls */}
+          <div className="pointer-events-none z-10">
+            <button
               onClick={handlePrev}
-              className="w-12 h-12 rounded-full bg-white border border-ink-200 shadow-sm flex items-center justify-center text-ink-600 hover:text-gold hover:border-gold pointer-events-auto transition-all"
+              className="absolute top-1/2 -translate-y-1/2 -left-12 sm:-left-14 md:-left-16 w-11 h-11 rounded-full bg-white border border-ink-200 shadow-sm flex items-center justify-center text-ink-500 hover:text-gold hover:border-gold/50 pointer-events-auto transition-all duration-200 hover:shadow-md cursor-pointer"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-5 h-5" />
             </button>
-            <button 
+            <button
               onClick={handleNext}
-              className="w-12 h-12 rounded-full bg-white border border-ink-200 shadow-sm flex items-center justify-center text-ink-600 hover:text-gold hover:border-gold pointer-events-auto transition-all"
+              className="absolute top-1/2 -translate-y-1/2 -right-12 sm:-right-14 md:-right-16 w-11 h-11 rounded-full bg-white border border-ink-200 shadow-sm flex items-center justify-center text-ink-500 hover:text-gold hover:border-gold/50 pointer-events-auto transition-all duration-200 hover:shadow-md cursor-pointer"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-5 h-5" />
             </button>
           </div>
         </div>
-        
-        {/* Indicators */}
-        <div className="flex justify-center gap-2 mt-8">
-          {testimonials.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => {
-                setDirection(idx > currentIndex ? 1 : -1);
-                setCurrentIndex(idx);
-              }}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-gold' : 'bg-ink-300'}`}
-              aria-label={`Go to testimonial ${idx + 1}`}
-            />
-          ))}
+
+        {/* Dot indicators */}
+        <div className="flex items-center justify-center w-full mt-8 md:mt-6">
+          <div className="flex justify-center">
+            {testimonials.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => {
+                  setDirection(idx > currentIndex ? 1 : -1);
+                  setCurrentIndex(idx);
+                }}
+                className="w-12 h-12 cursor-pointer group flex items-center justify-center touch-manipulation"
+                aria-label={`Go to testimonial ${idx + 1}`}
+              >
+                <div
+                  className={`rounded-full transition-all duration-300 ${
+                    idx === currentIndex ? "w-7 h-2 bg-gold" : "w-2 h-2 bg-ink-200 group-hover:bg-ink-300"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
         </div>
 
       </div>
