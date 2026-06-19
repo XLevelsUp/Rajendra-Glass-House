@@ -1,5 +1,6 @@
 import { AnimatedContainer } from "@/components/ui/AnimatedContainer";
 import Link from "next/link";
+import Image from "next/image";
 
 export function AboutPreview() {
   return (
@@ -10,10 +11,12 @@ export function AboutPreview() {
           {/* Image */}
           <AnimatedContainer direction="left" className="relative">
             <div className="aspect-[4/5] rounded-sm overflow-hidden">
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1545464333-9cbd1f263054?q=80&w=2000&auto=format&fit=crop"
                 alt="Rajendra Glass House showroom Coimbatore"
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
               />
             </div>
             {/* Year badge */}
@@ -51,7 +54,7 @@ export function AboutPreview() {
               ].map(([num, text]) => (
                 <div key={text} className="border-l border-gold/30 pl-4">
                   <div className="font-serif text-xl text-gold font-bold">{num}</div>
-                  <div className="text-[12px] text-ink-400 tracking-wide mt-0.5">{text}</div>
+                  <div className="text-[12px] text-ink-300 tracking-wide mt-0.5">{text}</div>
                 </div>
               ))}
             </div>

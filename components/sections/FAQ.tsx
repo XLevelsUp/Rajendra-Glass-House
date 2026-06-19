@@ -1,63 +1,47 @@
-"use client"
+"use client";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { AnimatedContainer } from "@/components/ui/AnimatedContainer";
+import { cn } from "@/lib/utils";
 
-import * as React from "react"
-import { FAQItem } from "@/types"
-import * as Accordion from "@radix-ui/react-accordion"
-import { ChevronDown } from "lucide-react"
-
-const faqs: FAQItem[] = [
-  {
-    question: "How long does it take to get set up?",
-    answer: "You can be up and running in less than 5 minutes. Our simple deployment process and comprehensive documentation make it incredibly easy to get started.",
-  },
-  {
-    question: "Can I use my own custom domain?",
-    answer: "Absolutely. All of our plans include custom domain support. We provide easy-to-follow instructions to help you configure your DNS settings.",
-  },
-  {
-    question: "Do you offer refunds?",
-    answer: "Yes, we offer a 30-day money-back guarantee. If you're not completely satisfied with our platform, just let us know and we'll refund your payment in full.",
-  },
-  {
-    question: "What kind of support do you provide?",
-    answer: "We offer email support for all customers. Pro users get priority 1-hour response times, and Enterprise customers have access to a dedicated success manager and 24/7 phone support.",
-  },
-]
+const faqs = [
+  { q: "Do you provide installation services?", a: "Yes, we have a dedicated team of expert installers for all our products across Coimbatore and surrounding regions." },
+  { q: "Is your glass authentic Saint Gobain?", a: "Absolutely. We are an authorized dealer and provide genuine Saint Gobain glass with brand marking and warranty." },
+  { q: "How long does a custom shower enclosure take?", a: "From final measurement to installation, it typically takes 5 to 7 working days depending on the complexity." },
+  { q: "Do you undertake commercial and wholesale orders?", a: "Yes, we cater to bulk requirements for builders, architects, and corporate projects with specialized wholesale pricing." }
+];
 
 export function FAQ() {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
   return (
-    <section id="faq" className="py-24">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-lg text-foreground/70">
-            Have a different question and can't find the answer you're looking for? Reach out to our support team.
-          </p>
-        </div>
-        <Accordion.Root type="single" collapsible className="space-y-4">
-          {faqs.map((faq, index) => (
-            <Accordion.Item 
-              key={index} 
-              value={`item-${index}`}
-              className="border border-border rounded-lg overflow-hidden bg-background"
-            >
-              <Accordion.Header className="flex">
-                <Accordion.Trigger className="flex flex-1 items-center justify-between py-4 px-6 font-medium transition-all hover:bg-brand-50/50 dark:hover:bg-brand-900/10 [&[data-state=open]>svg]:rotate-180">
-                  {faq.question}
-                  <ChevronDown className="h-5 w-5 text-foreground/50 transition-transform duration-200" />
-                </Accordion.Trigger>
-              </Accordion.Header>
-              <Accordion.Content className="overflow-hidden text-foreground/70 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                <div className="px-6 pb-4 pt-0">
-                  {faq.answer}
+    <section className="py-24 border-t border-ink-200 bg-white">
+      <div className="max-w-3xl mx-auto px-6">
+        <AnimatedContainer className="text-center mb-16">
+          <h2 className="font-serif text-3xl md:text-4xl text-ink-950 font-bold mb-4">Frequently Asked Questions</h2>
+        </AnimatedContainer>
+
+        <div className="space-y-4">
+          {faqs.map((faq, i) => (
+            <AnimatedContainer key={i} delay={i * 0.1}>
+              <div className="border border-ink-200 bg-[#F8FAFC] rounded-xl overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full text-left px-6 py-5 flex items-center justify-between focus:outline-none"
+                >
+                  <span className={cn("font-semibold text-sm md:text-base pr-4 transition-colors", openFaq === i ? "text-gold" : "text-ink-900")}>
+                    {faq.q}
+                  </span>
+                  <ChevronDown className={cn("w-5 h-5 text-ink-500 transition-transform duration-300 flex-shrink-0", openFaq === i && "rotate-180 text-gold")} />
+                </button>
+                <div className={cn("px-6 overflow-hidden transition-all duration-300", openFaq === i ? "max-h-40 pb-5 opacity-100" : "max-h-0 opacity-0")}>
+                  <p className="text-ink-600 font-medium text-sm leading-relaxed">{faq.a}</p>
                 </div>
-              </Accordion.Content>
-            </Accordion.Item>
+              </div>
+            </AnimatedContainer>
           ))}
-        </Accordion.Root>
+        </div>
       </div>
     </section>
-  )
+  );
 }

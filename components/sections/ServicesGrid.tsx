@@ -43,6 +43,11 @@ const services = [
     desc: "Frosted, etched, tinted & mural glass for interiors.",
     href: "/services#decorative-glass",
   },
+  {
+    title: "Glass Blocks",
+    desc: "Architectural glass blocks for partitions, facades & decorative walls.",
+    href: "/services#glass-blocks",
+  },
 ];
 
 export function ServicesGrid() {
@@ -69,7 +74,7 @@ export function ServicesGrid() {
                 href={s.href}
                 className="group block bg-white border border-ink-100 rounded-2xl p-7 h-full hover:border-gold hover:shadow-lg transition-all duration-300 cursor-pointer"
               >
-                <span className="text-[11px] font-semibold tracking-[0.15em] uppercase text-ink-400 group-hover:text-gold transition-colors">
+                <span className="text-[11px] font-semibold tracking-[0.15em] uppercase text-ink-500 group-hover:text-gold transition-colors">
                   0{i + 1}
                 </span>
                 <h3 className="font-serif text-2xl text-ink-900 mt-6 mb-3">

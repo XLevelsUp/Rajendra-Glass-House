@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react"
 import { NAV_LINKS, PHONE, PHONE_DISPLAY } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
+import { motion, AnimatePresence } from "framer-motion"
 
 export function Header() {
   const [open, setOpen] = React.useState(false)
@@ -23,13 +24,18 @@ export function Header() {
   React.useEffect(() => { setOpen(false) }, [pathname])
 
   return (
-    <header className={cn(
-      "fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b",
-      scrolled
-        ? "bg-white/90 backdrop-blur-md border-gold/20 shadow-sm py-4"
-        : "bg-transparent border-transparent py-6"
-    )}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+    <motion.header
+      initial={{ y: -24, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={cn(
+        "fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300",
+        scrolled
+          ? "bg-white/95 backdrop-blur-xl border-b border-[#E2E3EB] shadow-[0_4px_24px_rgba(0,0,0,0.08)] py-3"
+          : "bg-white/80 backdrop-blur-md border-b border-white/60 shadow-[0_2px_16px_rgba(0,0,0,0.06)] py-4"
+      )}
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between">
 
           {/* Logo */}
@@ -41,39 +47,43 @@ export function Header() {
               width={160}
               height={48}
               priority
-              className="h-11 w-auto"
+              className="h-10 w-auto"
             />
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-10">
+          <nav className="hidden lg:flex items-center gap-8">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "text-[11px] font-semibold tracking-[0.15em] uppercase transition-colors hover:text-gold",
+                  "text-[11px] font-semibold tracking-[0.15em] uppercase transition-colors duration-200 relative group",
                   pathname === link.href
                     ? "text-gold"
-                    : "text-ink-950"
+                    : "text-ink-700 hover:text-gold"
                 )}
               >
                 {link.label}
+                <span className={cn(
+                  "absolute -bottom-1 left-0 h-px bg-gold transition-all duration-300",
+                  pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
+                )} />
               </Link>
             ))}
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-5">
             <a
               href={`tel:${PHONE}`}
-              className="text-[13px] text-ink-950 hover:text-gold transition-colors tracking-wide font-medium"
+              className="text-[12px] text-ink-600 hover:text-gold transition-colors tracking-wide font-semibold"
             >
               {PHONE_DISPLAY}
             </a>
             <Link
               href="/contact"
-              className="text-[11px] font-bold px-6 py-2.5 border border-gold text-gold hover:bg-gold hover:text-white rounded transition-all duration-200 tracking-[0.15em] uppercase"
+              className="text-[11px] font-bold px-5 py-2.5 bg-gold text-ink-950 hover:bg-gold-dark rounded-xl transition-all duration-200 tracking-[0.1em] uppercase shadow-sm hover:shadow-md hover:-translate-y-px"
             >
               Get Quote
             </Link>
@@ -82,47 +92,67 @@ export function Header() {
           {/* Mobile toggle */}
           <button
             onClick={() => setOpen(!open)}
-            className="lg:hidden text-ink-950 hover:text-gold transition-colors p-1"
+            className="lg:hidden text-ink-800 hover:text-gold transition-colors p-1.5 rounded-lg hover:bg-ink-100"
             aria-label="Toggle navigation"
           >
-            {open ? <X size={22} /> : <Menu size={22} />}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={open ? "close" : "open"}
+                initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
+                transition={{ duration: 0.15 }}
+              >
+                {open ? <X size={20} /> : <Menu size={20} />}
+              </motion.div>
+            </AnimatePresence>
           </button>
         </div>
       </div>
 
       {/* Mobile drawer */}
-      {open && (
-        <div className="lg:hidden bg-white border-b border-gold/20 shadow-xl">
-          <div className="max-w-7xl mx-auto px-6 py-8 space-y-1">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "block py-3 text-sm font-semibold tracking-widest uppercase border-b border-ink-100 transition-colors",
-                  pathname === link.href ? "text-gold" : "text-ink-950 hover:text-gold"
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <div className="pt-6 space-y-3">
-              <a
-                href={`tel:${PHONE}`}
-                className="block text-center py-3 text-sm font-medium text-ink-950 border border-ink-200 rounded"
-              >
-                {PHONE_DISPLAY}
-              </a>
-              <Link
-                href="/contact"
-                className="block text-center py-3 text-sm font-bold bg-gold text-white rounded tracking-wider uppercase"
-              >
-                Get Quote
-              </Link>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="lg:hidden overflow-hidden"
+          >
+            <div className="border-t border-ink-100 mt-3 mx-6 pt-4 pb-5 space-y-1">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "flex items-center py-2.5 px-3 rounded-xl text-sm font-semibold tracking-widest uppercase transition-all duration-200",
+                    pathname === link.href
+                      ? "text-gold bg-gold/8"
+                      : "text-ink-700 hover:text-gold hover:bg-ink-50"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <div className="pt-4 space-y-2.5 border-t border-ink-100 mt-3">
+                <a
+                  href={`tel:${PHONE}`}
+                  className="flex items-center justify-center py-2.5 text-sm font-semibold text-ink-700 border border-ink-200 rounded-xl hover:border-gold hover:text-gold transition-all"
+                >
+                  {PHONE_DISPLAY}
+                </a>
+                <Link
+                  href="/contact"
+                  className="flex items-center justify-center py-2.5 text-sm font-bold bg-gold text-ink-950 rounded-xl tracking-wider uppercase hover:bg-gold-dark transition-colors"
+                >
+                  Get Quote
+                </Link>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
-    </header>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   )
 }

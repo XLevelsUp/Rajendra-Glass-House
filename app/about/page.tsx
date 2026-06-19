@@ -4,10 +4,10 @@ import { CheckCircle2 } from "lucide-react";
 import { AnimatedContainer } from "@/components/ui/AnimatedContainer";
 
 const timeline = [
-  { year: "1977", title: "The Beginning", desc: "Started as a small retail glass shop in RS Puram, Coimbatore." },
-  { year: "1995", title: "Commercial Expansion", desc: "Began serving large-scale commercial and hospitality projects." },
-  { year: "2010", title: "Saint Gobain Partnership", desc: "Became an authorized dealer for premium architectural glass." },
-  { year: "2024", title: "Modern Showroom", desc: "Relocated to a state-of-the-art facility showcasing modern applications." },
+  { year: "1977", title: "The Beginning & Saint Gobain Partnership", desc: "Established in Coimbatore and immediately partnered with Saint Gobain to provide premium glass." },
+  { year: "1995", title: "Commercial Expansion", desc: "Began serving large-scale commercial and hospitality projects across Tamil Nadu." },
+  { year: "2010", title: "Advanced Processing", desc: "Introduced in-house precise cutting, edging, and custom enclosure manufacturing." },
+  { year: "2024", title: "Modern Showroom", desc: "Expanded to a state-of-the-art facility showcasing luxury architectural applications." },
 ];
 
 export default function AboutPage() {
@@ -23,8 +23,8 @@ export default function AboutPage() {
               <span className="text-gold">Glass Excellence</span>
             </h1>
             <p className="text-ink-600 font-medium text-lg leading-relaxed">
-              Established in 1977, Rajendra Glass House has grown from a humble retail shop into 
-              Coimbatore's most trusted name in architectural glass, mirrors, and custom enclosures.
+              Established in 1977, Rajendra Glass House has grown from a humble retail store into 
+              Coimbatore's most trusted architectural glass provider, specializing in premium mirrors, toughened glass, and bespoke enclosures.
             </p>
           </AnimatedContainer>
         </div>
@@ -40,13 +40,13 @@ export default function AboutPage() {
               <h2 className="font-serif text-3xl md:text-4xl text-ink-950 font-bold mb-8">The Legacy</h2>
               <div className="space-y-6 text-ink-600 font-medium leading-relaxed mb-10">
                 <p>
-                  For over 45 years, we have built our reputation on precision, quality, and trust. 
-                  We don't just sell glass; we provide architectural solutions that transform spaces.
+                  For over 45 years, we have built our reputation on precision, quality, and unwavering trust. 
+                  We are more than just glass dealers in Coimbatore; we provide comprehensive architectural solutions that transform ordinary spaces into extraordinary landmarks.
                 </p>
                 <p>
-                  As an authorized dealer for Saint Gobain, we ensure that every pane of glass 
-                  installed in your home or office meets the highest global standards for safety, 
-                  clarity, and durability.
+                  As the leading Saint Gobain glass dealer in Coimbatore, we ensure that every pane of glass 
+                  installed in your residential or commercial project meets the highest global standards for safety, 
+                  clarity, and structural integrity.
                 </p>
               </div>
               
