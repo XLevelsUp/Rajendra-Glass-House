@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { Box, Typography } from "@mui/material";
+
 
 const allProjects = [
   { id: 1, title: "Frameless Balcony Railing", category: "Residential", location: "RS Puram", image: "/projects/balcony-railing.webp" },
@@ -26,24 +28,24 @@ export default function ProjectsPage() {
   const filtered = allProjects.filter((p) => activeTab === "All" || p.category === activeTab);
 
   return (
-    <div className="bg-surface-body min-h-screen pt-20">
+    <Box className="bg-surface-body min-h-screen pt-20">
       {/* Hero */}
-      <section className="py-24 border-b border-ink-200 text-center bg-white">
-        <div className="max-w-4xl mx-auto px-6">
+      <Box component="section" className="py-24 border-b border-ink-200 text-center bg-white">
+        <Box className="max-w-4xl mx-auto px-6">
           <AnimatedContainer>
-            <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-6 font-semibold">Our Portfolio</p>
-            <h1 className="font-serif text-5xl md:text-7xl text-ink-950 font-bold mb-8 leading-[1.1] tracking-tight">
+            <Typography component="p" className="text-[11px] tracking-[0.2em] uppercase text-gold mb-6 font-semibold">Our Portfolio</Typography>
+            <Typography variant="h1" component="h1" className="font-serif text-5xl md:text-7xl text-ink-950 font-bold mb-8 leading-[1.1] tracking-tight">
               Featured Projects
-            </h1>
-            <p className="text-ink-600 text-lg max-w-2xl mx-auto font-medium">
+            </Typography>
+            <Typography component="p" className="text-ink-600 text-lg max-w-2xl mx-auto font-medium">
               Explore our recent installations across residential, commercial, and hospitality sectors.
-            </p>
+            </Typography>
           </AnimatedContainer>
-        </div>
-      </section>
+        </Box>
+      </Box>
 
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      <Box component="section" className="py-24">
+        <Box className="max-w-7xl mx-auto px-6 lg:px-10">
           
           {/* Filters */}
           <AnimatedContainer className="flex flex-wrap justify-center gap-3 mb-16">
@@ -86,34 +88,34 @@ export default function ProjectsPage() {
                   />
                   
                   {/* Deep luxury gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+                  <Box className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
                   
                   {/* Inner glow on hover */}
-                  <div className="absolute inset-0 border-2 border-transparent group-hover:border-gold/30 rounded-[2rem] transition-colors duration-700 pointer-events-none" />
+                  <Box className="absolute inset-0 border-2 border-transparent group-hover:border-gold/30 rounded-[2rem] transition-colors duration-700 pointer-events-none" />
                   
-                  <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-gold">
+                  <Box className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    <Box className="flex items-center justify-between mb-4">
+                      <Typography component="span" className="text-[10px] font-bold tracking-[0.3em] uppercase text-gold">
                         {project.category}
-                      </span>
-                      <span className="text-[10px] uppercase tracking-wider text-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                      </Typography>
+                      <Typography component="span" className="text-[10px] uppercase tracking-wider text-white/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                         {project.location}
-                      </span>
-                    </div>
-                    <h3 className="font-serif text-2xl text-white font-medium mb-2 opacity-90 group-hover:opacity-100 transition-opacity duration-500">
+                      </Typography>
+                    </Box>
+                    <Typography variant="h3" component="h3" className="font-serif text-2xl text-white font-medium mb-2 opacity-90 group-hover:opacity-100 transition-opacity duration-500">
                       {project.title}
-                    </h3>
+                    </Typography>
                     
                     {/* Reveal line */}
-                    <div className="h-[1px] w-0 bg-gold group-hover:w-12 transition-all duration-700 ease-out delay-150 mt-4" />
-                  </div>
+                    <Box className="h-[1px] w-0 bg-gold group-hover:w-12 transition-all duration-700 ease-out delay-150 mt-4" />
+                  </Box>
                 </motion.div>
               ))}
             </AnimatePresence>
           </motion.div>
 
           <AnimatedContainer className="mt-20 text-center">
-            <p className="text-ink-600 mb-6 font-medium">Have a similar project in mind?</p>
+            <Typography component="p" className="text-ink-600 mb-6 font-medium">Have a similar project in mind?</Typography>
             <Link 
               href="/contact"
               className="inline-flex items-center justify-center px-8 py-4 bg-gold text-ink-950 font-bold text-sm rounded-xl hover:bg-gold-dark hover:scale-105 transition-all shadow-lg shadow-gold/20 tracking-wide"
@@ -122,8 +124,8 @@ export default function ProjectsPage() {
             </Link>
           </AnimatedContainer>
 
-        </div>
-      </section>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 }

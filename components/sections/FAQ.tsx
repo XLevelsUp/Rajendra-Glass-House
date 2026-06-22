@@ -3,6 +3,8 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { AnimatedContainer } from "@/components/ui/AnimatedContainer";
 import { cn } from "@/lib/utils";
+import { Box, Typography } from "@mui/material";
+
 
 const faqs = [
   { q: "Do you provide installation services?", a: "Yes, we have a dedicated team of expert installers for all our products across Coimbatore and surrounding regions." },
@@ -15,33 +17,33 @@ export function FAQ() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
-    <section className="py-24 border-t border-ink-200 bg-white">
-      <div className="max-w-3xl mx-auto px-6">
+    <Box component="section" className="py-24 border-t border-ink-200 bg-white">
+      <Box className="max-w-3xl mx-auto px-6">
         <AnimatedContainer className="text-center mb-16">
-          <h2 className="font-serif text-3xl md:text-4xl text-ink-950 font-bold mb-4">Frequently Asked Questions</h2>
+          <Typography variant="h2" component="h2" className="font-serif text-3xl md:text-4xl text-ink-950 font-bold mb-4">Frequently Asked Questions</Typography>
         </AnimatedContainer>
 
-        <div className="space-y-4">
+        <Box className="space-y-4">
           {faqs.map((faq, i) => (
             <AnimatedContainer key={i} delay={i * 0.1}>
-              <div className="border border-ink-200 bg-[#F8FAFC] rounded-xl overflow-hidden shadow-sm">
+              <Box className="border border-ink-200 bg-[#F8FAFC] rounded-xl overflow-hidden shadow-sm">
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   className="w-full text-left px-6 py-5 flex items-center justify-between focus:outline-none"
                 >
-                  <span className={cn("font-semibold text-sm md:text-base pr-4 transition-colors", openFaq === i ? "text-gold" : "text-ink-900")}>
+                  <Typography component="span" className={cn("font-semibold text-sm md:text-base pr-4 transition-colors", openFaq === i ? "text-gold" : "text-ink-900")}>
                     {faq.q}
-                  </span>
+                  </Typography>
                   <ChevronDown className={cn("w-5 h-5 text-ink-500 transition-transform duration-300 flex-shrink-0", openFaq === i && "rotate-180 text-gold")} />
                 </button>
-                <div className={cn("px-6 overflow-hidden transition-all duration-300", openFaq === i ? "max-h-40 pb-5 opacity-100" : "max-h-0 opacity-0")}>
-                  <p className="text-ink-600 font-medium text-sm leading-relaxed">{faq.a}</p>
-                </div>
-              </div>
+                <Box className={cn("px-6 overflow-hidden transition-all duration-300", openFaq === i ? "max-h-40 pb-5 opacity-100" : "max-h-0 opacity-0")}>
+                  <Typography component="p" className="text-ink-600 font-medium text-sm leading-relaxed">{faq.a}</Typography>
+                </Box>
+              </Box>
             </AnimatedContainer>
           ))}
-        </div>
-      </div>
-    </section>
+        </Box>
+      </Box>
+    </Box>
   );
 }

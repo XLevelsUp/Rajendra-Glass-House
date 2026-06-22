@@ -5,6 +5,8 @@ import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FAQ } from "@/components/sections/FAQ";
+import { Box, Typography } from "@mui/material";
+
 
 const products = [
   {
@@ -131,36 +133,36 @@ const products = [
 
 export default function ServicesPage() {
   return (
-    <div className="bg-[#F8FAFC] min-h-screen pt-20">
+    <Box className="bg-[#F8FAFC] min-h-screen pt-20">
 
       {/* Hero */}
-      <section className="py-24 border-b border-ink-200 text-center bg-white relative overflow-hidden">
-        <div className="absolute top-[10%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-gold/5 blur-[100px]" />
-        <div className="max-w-4xl mx-auto px-6 relative z-10">
+      <Box component="section" className="py-24 border-b border-ink-200 text-center bg-white relative overflow-hidden">
+        <Box className="absolute top-[10%] right-[10%] w-[30vw] h-[30vw] rounded-full bg-gold/5 blur-[100px]" />
+        <Box className="max-w-4xl mx-auto px-6 relative z-10">
           <AnimatedContainer>
-            <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-6 font-semibold">Our Catalog</p>
-            <h1 className="font-serif text-5xl md:text-7xl text-ink-950 font-bold mb-8 leading-[1.1] tracking-tight">
+            <Typography component="p" className="text-[11px] tracking-[0.2em] uppercase text-gold mb-6 font-semibold">Our Catalog</Typography>
+            <Typography variant="h1" component="h1" className="font-serif text-5xl md:text-7xl text-ink-950 font-bold mb-8 leading-[1.1] tracking-tight">
               Products & Services
-            </h1>
-            <p className="text-ink-600 text-lg max-w-2xl mx-auto font-medium">
+            </Typography>
+            <Typography component="p" className="text-ink-600 text-lg max-w-2xl mx-auto font-medium">
               Explore our comprehensive range of premium architectural solutions. As the leading glass suppliers Tamil Nadu trusts, we offer expert installation and custom glass cutting in Coimbatore for any project size.
-            </p>
+            </Typography>
           </AnimatedContainer>
-        </div>
-      </section>
+        </Box>
+      </Box>
 
       {/* Services List - One by One Alternating Layout */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 space-y-32">
+      <Box component="section" className="py-24">
+        <Box className="max-w-7xl mx-auto px-6 lg:px-10 space-y-32">
           {products.map((service, idx) => (
-            <div key={service.id} id={service.id} className={cn("grid lg:grid-cols-2 gap-16 items-center", idx % 2 !== 0 && "lg:grid-cols-[1fr_1fr]")}>
+            <Box key={service.id} id={service.id} className={cn("grid lg:grid-cols-2 gap-16 items-center", idx % 2 !== 0 && "lg:grid-cols-[1fr_1fr]")}>
 
                 <AnimatedContainer 
                   direction={idx % 2 === 0 ? "left" : "right"}
                   delay={0.1}
                   className={cn("order-2", idx % 2 !== 0 ? "lg:order-1" : "lg:order-2")}
                 >
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-white shadow-sm border border-ink-100 group">
+                  <Box className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-white shadow-sm border border-ink-100 group">
                     <Image 
                       src={service.image} 
                       alt={service.title} 
@@ -169,7 +171,7 @@ export default function ServicesPage() {
                       priority={idx === 0}
                       className="object-contain group-hover:scale-105 transition-transform duration-700" 
                     />
-                  </div>
+                  </Box>
                 </AnimatedContainer>
 
                 <AnimatedContainer 
@@ -177,18 +179,18 @@ export default function ServicesPage() {
                   delay={0.3}
                   className={cn("order-1", idx % 2 !== 0 ? "lg:order-2" : "lg:order-1")}
                 >
-                  <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gold mb-4 block">{service.subtitle}</span>
-                  <h2 className="font-serif text-3xl md:text-4xl text-ink-950 font-bold mb-6">{service.title}</h2>
-                  <p className="text-ink-600 font-medium text-lg leading-relaxed mb-8">{service.desc}</p>
+                  <Typography component="span" className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gold mb-4 block">{service.subtitle}</Typography>
+                  <Typography variant="h2" component="h2" className="font-serif text-3xl md:text-4xl text-ink-950 font-bold mb-6">{service.title}</Typography>
+                  <Typography component="p" className="text-ink-600 font-medium text-lg leading-relaxed mb-8">{service.desc}</Typography>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+                  <Box className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                     {service.features.map(f => (
-                      <div key={f} className="flex items-start gap-3">
+                      <Box key={f} className="flex items-start gap-3">
                         <CheckCircle2 className="w-4 h-4 text-gold mt-1 flex-shrink-0" />
-                        <span className="text-sm text-ink-600 font-medium">{f}</span>
-                      </div>
+                        <Typography component="span" className="text-sm text-ink-600 font-medium">{f}</Typography>
+                      </Box>
                     ))}
-                  </div>
+                  </Box>
 
                   <Link
                     href={`/contact?service=${encodeURIComponent(service.title)}`}
@@ -199,12 +201,12 @@ export default function ServicesPage() {
                   </Link>
                 </AnimatedContainer>
 
-            </div>
+            </Box>
           ))}
-        </div>
-      </section>
+        </Box>
+      </Box>
 
       <FAQ />
-    </div>
+    </Box>
   );
 }

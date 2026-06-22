@@ -1,5 +1,7 @@
 "use client";
 import { AnimatedContainer } from "@/components/ui/AnimatedContainer";
+import { Box, Typography } from "@mui/material";
+
 
 const stats = [
   { value: "1977", label: "Established" },
@@ -10,19 +12,19 @@ const stats = [
 
 export function StatsSection() {
   return (
-    <section className="py-16 bg-white border-t border-b border-ink-100">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-ink-100 border border-ink-100 rounded-xl overflow-hidden">
+    <Box component="section" className="py-16 bg-white border-t border-b border-ink-100">
+      <Box className="max-w-7xl mx-auto px-6 lg:px-10">
+        <Box className="grid grid-cols-2 md:grid-cols-4 gap-px bg-ink-100 border border-ink-100 rounded-xl overflow-hidden">
           {stats.map((s, i) => (
             <AnimatedContainer key={s.label} delay={i * 0.1}>
-              <div className="bg-white py-10 px-8 text-center hover:bg-[#F8FAFC] transition-colors h-full">
-                <div className="font-serif text-4xl text-gold font-bold mb-1">{s.value}</div>
-                <div className="text-[11px] text-ink-600 font-semibold tracking-widest uppercase">{s.label}</div>
-              </div>
+              <Box className="bg-white py-10 px-8 text-center hover:bg-[#F8FAFC] transition-colors h-full">
+                <Box className="font-serif text-4xl text-gold font-bold mb-1">{s.value}</Box>
+                <Box className="text-[11px] text-ink-600 font-semibold tracking-widest uppercase">{s.label}</Box>
+              </Box>
             </AnimatedContainer>
           ))}
-        </div>
-      </div>
-    </section>
+        </Box>
+      </Box>
+    </Box>
   );
 }

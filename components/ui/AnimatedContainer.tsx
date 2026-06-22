@@ -3,6 +3,7 @@
 import { motion, HTMLMotionProps, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import React from "react";
+import { Box } from "@mui/material";
 
 interface AnimatedContainerProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
@@ -38,15 +39,16 @@ export function AnimatedContainer({
     : { duration: 0.7, delay, ease: "easeOut" };
 
   return (
-    <motion.div
+    <Box
+      component={motion.div}
       initial={initialVariant}
       whileInView={whileInViewVariant}
       viewport={{ once: true, margin: "-100px" }}
       transition={transition}
       className={cn(className)}
-      {...props}
+      {...(props as any)}
     >
       {children}
-    </motion.div>
+    </Box>
   );
 }

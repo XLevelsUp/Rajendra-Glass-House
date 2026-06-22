@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/layout/ThemeProvider"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton"
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter"
 
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-heading" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-body" });
@@ -114,22 +115,24 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
       </head>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          forcedTheme="dark"
-          disableTransitionOnChange
-        >
-          <div className="flex min-h-screen flex-col bg-surface-body relative">
-            <div className="absolute inset-0 bg-noise pointer-events-none mix-blend-overlay z-0" />
-            <div className="relative z-10 flex flex-col min-h-screen">
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
+        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            forcedTheme="dark"
+            disableTransitionOnChange
+          >
+            <div className="flex min-h-screen flex-col bg-surface-body relative">
+              <div className="absolute inset-0 bg-noise pointer-events-none mix-blend-overlay z-0" />
+              <div className="relative z-10 flex flex-col min-h-screen">
+                <Header />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </div>
+              <WhatsAppButton />
             </div>
-            <WhatsAppButton />
-          </div>
-        </ThemeProvider>
+          </ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   )
