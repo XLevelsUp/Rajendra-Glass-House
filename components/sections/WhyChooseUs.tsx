@@ -1,6 +1,9 @@
+"use client";
 import { AnimatedContainer } from "@/components/ui/AnimatedContainer";
 import { Gem, Wand2, ShieldCheck, HardHat, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { Box, Typography } from "@mui/material";
+
 
 const reasons = [
   {
@@ -27,58 +30,58 @@ const reasons = [
 
 export function WhyChooseUs() {
   return (
-    <section className="py-28 bg-white border-t border-ink-100 overflow-hidden relative">
+    <Box component="section" className="py-28 bg-white border-t border-ink-100 overflow-hidden relative">
 
       {/* Subtle decorative background */}
-      <div className="absolute top-0 right-0 w-[40vw] h-[40vw] rounded-full bg-gold/3 blur-[160px] pointer-events-none" />
+      <Box className="absolute top-0 right-0 w-[40vw] h-[40vw] rounded-full bg-gold/3 blur-[160px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
+      <Box className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
 
         {/* Section header */}
         <AnimatedContainer className="mb-16 text-center">
-          <span className="section-kicker mb-4 block">Our Advantage</span>
-          <h2 className="font-serif text-4xl md:text-5xl text-ink-950 font-bold mb-5 tracking-tight">
+          <Typography component="span" className="section-kicker mb-4 block">Our Advantage</Typography>
+          <Typography variant="h2" component="h2" className="font-serif text-4xl md:text-5xl text-ink-950 font-bold mb-5 tracking-tight">
             Why Choose Us
-          </h2>
-          <div className="gold-separator mx-auto mb-6" />
-          <p className="text-ink-600 text-[15px] leading-relaxed max-w-2xl mx-auto font-medium">
+          </Typography>
+          <Box className="gold-separator mx-auto mb-6" />
+          <Typography component="p" className="text-ink-600 text-[15px] leading-relaxed max-w-2xl mx-auto font-medium">
             We combine decades of technical expertise with premium materials to deliver architectural glass and plywood
             solutions that stand the test of time.
-          </p>
+          </Typography>
         </AnimatedContainer>
 
         {/* Reasons grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+        <Box className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
           {reasons.map((item, i) => {
             const Icon = item.Icon;
             return (
               <AnimatedContainer key={item.title} delay={i * 0.1}>
-                <div className="group premium-card flex flex-col md:flex-row items-start gap-6 p-8 rounded-2xl h-full cursor-default">
+                <Box className="group premium-card flex flex-col md:flex-row items-start gap-6 p-8 rounded-2xl h-full cursor-default">
 
                   {/* Icon circle */}
-                  <div className="w-16 h-16 shrink-0 rounded-2xl bg-gold/8 border border-gold/20 flex items-center justify-center transition-all duration-300 group-hover:bg-gold/15 group-hover:border-gold/40 group-hover:scale-110">
+                  <Box className="w-16 h-16 shrink-0 rounded-2xl bg-gold/8 border border-gold/20 flex items-center justify-center transition-all duration-300 group-hover:bg-gold/15 group-hover:border-gold/40 group-hover:scale-110">
                     <Icon
                       size={26}
                       className="text-gold/70 group-hover:text-gold transition-colors duration-300"
                       strokeWidth={1.5}
                     />
-                  </div>
+                  </Box>
 
                   {/* Text */}
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-serif text-lg text-ink-900 font-semibold mb-3 group-hover:text-gold transition-colors duration-300">
+                  <Box className="flex-1 min-w-0">
+                    <Typography variant="h3" component="h3" className="font-serif text-lg text-ink-900 font-semibold mb-3 group-hover:text-gold transition-colors duration-300">
                       {item.title}
-                    </h3>
-                    <p className="text-sm text-ink-600 leading-relaxed font-medium">{item.desc}</p>
-                  </div>
+                    </Typography>
+                    <Typography component="p" className="text-sm text-ink-600 leading-relaxed font-medium">{item.desc}</Typography>
+                  </Box>
 
-                </div>
+                </Box>
               </AnimatedContainer>
             );
           })}
-        </div>
+        </Box>
 
-      </div>
-    </section>
+      </Box>
+    </Box>
   );
 }

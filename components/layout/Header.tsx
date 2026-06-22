@@ -8,6 +8,7 @@ import { NAV_LINKS, PHONE, PHONE_DISPLAY } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
+import { Box, Typography } from "@mui/material"
 
 export function Header() {
   const [open, setOpen] = React.useState(false)
@@ -31,16 +32,16 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300",
         scrolled
-          ? "bg-white/95 backdrop-blur-xl border-b border-[#E2E3EB] shadow-[0_4px_24px_rgba(0,0,0,0.08)] py-3"
-          : "bg-white/80 backdrop-blur-md border-b border-white/60 shadow-[0_2px_16px_rgba(0,0,0,0.06)] py-4"
+          ? "bg-surface-body border-b border-[#E2E3EB] shadow-[0_4px_24px_rgba(0,0,0,0.08)] py-3"
+          : "bg-surface-body backdrop-blur-md border-b border-white/60 shadow-[0_2px_16px_rgba(0,0,0,0.06)] py-4"
       )}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <Box className="max-w-7xl mx-auto px-6 lg:px-8">
+        <Box className="flex items-center justify-between">
 
           {/* Logo */}
           <Link href="/" className="flex-shrink-0" title="glass house Coimbatore">
-            <span className="sr-only">Rajendra glass house Coimbatore</span>
+            <Typography component="span" className="sr-only">Rajendra glass house Coimbatore</Typography>
             <Image
               src="/Rajendra_glass_house_logo.svg"
               alt="Rajendra glass house Coimbatore"
@@ -52,7 +53,7 @@ export function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <Box component="nav" className="hidden lg:flex items-center gap-8">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -65,32 +66,34 @@ export function Header() {
                 )}
               >
                 {link.label}
-                <span className={cn(
+                <Typography component="span" className={cn(
                   "absolute -bottom-1 left-0 h-px bg-gold transition-all duration-300",
                   pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
                 )} />
               </Link>
             ))}
-          </nav>
+          </Box>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-5">
-            <a
+          <Box className="hidden lg:flex items-center gap-5">
+            <Typography
+              component="a"
               href={`tel:${PHONE}`}
               className="text-[12px] text-ink-600 hover:text-gold transition-colors tracking-wide font-semibold"
             >
               {PHONE_DISPLAY}
-            </a>
+            </Typography>
             <Link
               href="/contact"
               className="text-[11px] font-bold px-5 py-2.5 bg-gold text-ink-950 hover:bg-gold-dark rounded-xl transition-all duration-200 tracking-[0.1em] uppercase shadow-sm hover:shadow-md hover:-translate-y-px"
             >
               Get Quote
             </Link>
-          </div>
+          </Box>
 
           {/* Mobile toggle */}
-          <button
+          <Box
+            component="button"
             onClick={() => setOpen(!open)}
             className="lg:hidden text-ink-800 hover:text-gold transition-colors p-1.5 rounded-lg hover:bg-ink-100"
             aria-label="Toggle navigation"
@@ -106,9 +109,9 @@ export function Header() {
                 {open ? <X size={20} /> : <Menu size={20} />}
               </motion.div>
             </AnimatePresence>
-          </button>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
 
       {/* Mobile drawer */}
       <AnimatePresence>
@@ -120,7 +123,7 @@ export function Header() {
             transition={{ duration: 0.25, ease: "easeInOut" }}
             className="lg:hidden overflow-hidden"
           >
-            <div className="border-t border-ink-100 mt-3 mx-6 pt-4 pb-5 space-y-1">
+            <Box className="border-t border-ink-100 mt-3 mx-6 pt-4 pb-5 space-y-1">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
@@ -135,21 +138,22 @@ export function Header() {
                   {link.label}
                 </Link>
               ))}
-              <div className="pt-4 space-y-2.5 border-t border-ink-100 mt-3">
-                <a
+              <Box className="pt-4 space-y-2.5 border-t border-ink-100 mt-3">
+                <Typography
+                  component="a"
                   href={`tel:${PHONE}`}
                   className="flex items-center justify-center py-2.5 text-sm font-semibold text-ink-700 border border-ink-200 rounded-xl hover:border-gold hover:text-gold transition-all"
                 >
                   {PHONE_DISPLAY}
-                </a>
+                </Typography>
                 <Link
                   href="/contact"
                   className="flex items-center justify-center py-2.5 text-sm font-bold bg-gold text-ink-950 rounded-xl tracking-wider uppercase hover:bg-gold-dark transition-colors"
                 >
                   Get Quote
                 </Link>
-              </div>
-            </div>
+              </Box>
+            </Box>
           </motion.div>
         )}
       </AnimatePresence>

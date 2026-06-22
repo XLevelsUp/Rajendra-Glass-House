@@ -1,6 +1,8 @@
 "use client";
 import { AnimatedContainer } from "@/components/ui/AnimatedContainer";
 import Link from "next/link";
+import { Box, Typography } from "@mui/material";
+
 import {
   Layers,
   DoorOpen,
@@ -35,34 +37,34 @@ const products = [
 
 export function ProductsGrid() {
   return (
-    <section id="products" className="py-24 bg-surface-body relative overflow-hidden">
+    <Box component="section" id="products" className="py-24 bg-surface-body relative overflow-hidden">
 
       {/* Subtle background decoration */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+      <Box className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
+      <Box className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
 
         {/* Section header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <Box className="text-center max-w-2xl mx-auto mb-16">
           <AnimatedContainer delay={0.05}>
-            <span className="section-kicker mb-4 block">What We Offer</span>
+            <Typography component="span" className="section-kicker mb-4 block">What We Offer</Typography>
           </AnimatedContainer>
           <AnimatedContainer delay={0.1}>
-            <h2 className="font-serif text-4xl lg:text-5xl font-bold text-ink-950 mb-5 tracking-tight">
+            <Typography variant="h2" component="h2" className="font-serif text-4xl lg:text-5xl font-bold text-ink-950 mb-5 tracking-tight">
               Our Products
-            </h2>
+            </Typography>
           </AnimatedContainer>
           <AnimatedContainer delay={0.2}>
-            <div className="gold-separator mx-auto mb-6" />
-            <p className="text-ink-600 text-lg leading-relaxed font-medium">
+            <Box className="gold-separator mx-auto mb-6" />
+            <Typography component="p" className="text-ink-600 text-lg leading-relaxed font-medium">
               Explore our extensive collection of premium glass and plywood solutions, engineered for both aesthetic
               brilliance and structural durability.
-            </p>
+            </Typography>
           </AnimatedContainer>
-        </div>
+        </Box>
 
         {/* Products grid */}
-        <div className="flex flex-wrap justify-center gap-4">
+        <Box className="flex flex-wrap justify-center gap-4">
           {products.map((product, index) => {
             const Icon = product.Icon;
             return (
@@ -72,27 +74,27 @@ export function ProductsGrid() {
                 className="w-[calc(50%-0.5rem)] sm:w-[185px] lg:w-[200px]"
               >
                 <Link href={`/contact?service=${encodeURIComponent(product.name)}`} className="block h-full">
-                  <div className="group premium-card flex flex-col items-center justify-center text-center p-6 rounded-2xl h-full cursor-pointer min-h-[140px]">
+                  <Box className="group premium-card flex flex-col items-center justify-center text-center p-6 rounded-2xl h-full cursor-pointer min-h-[140px]">
                     {/* Icon circle */}
-                    <div className="w-14 h-14 rounded-full bg-gold/8 border border-gold/20 flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-gold/15 group-hover:border-gold/40 group-hover:scale-110">
+                    <Box className="w-14 h-14 rounded-full bg-gold/8 border border-gold/20 flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-gold/15 group-hover:border-gold/40 group-hover:scale-110">
                       <Icon
                         size={22}
                         className="text-gold/70 group-hover:text-gold transition-colors duration-300"
                         strokeWidth={1.5}
                       />
-                    </div>
-                    <h3 className="font-semibold text-[13px] text-ink-800 group-hover:text-gold transition-colors duration-300 leading-tight tracking-wide">
+                    </Box>
+                    <Typography variant="h3" component="h3" className="font-semibold text-[13px] text-ink-800 group-hover:text-gold transition-colors duration-300 leading-tight tracking-wide">
                       {product.name}
-                    </h3>
-                  </div>
+                    </Typography>
+                  </Box>
                 </Link>
               </AnimatedContainer>
             );
           })}
-        </div>
+        </Box>
 
-      </div>
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
-    </section>
+      </Box>
+      <Box className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+    </Box>
   );
 }

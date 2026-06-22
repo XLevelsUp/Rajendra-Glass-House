@@ -1,6 +1,9 @@
+"use client";
 import Link from "next/link";
 import { AnimatedContainer } from "@/components/ui/AnimatedContainer";
 import { ArrowRight } from "lucide-react";
+import { Box, Typography } from "@mui/material";
+
 
 const services = [
   {
@@ -52,14 +55,14 @@ const services = [
 
 export function ServicesGrid() {
   return (
-    <section className="py-28 bg-ink-50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+    <Box component="section" className="py-28 bg-ink-50">
+      <Box className="max-w-7xl mx-auto px-6 lg:px-10">
         {/* Header row */}
         <AnimatedContainer className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
-          <div>
-            <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">What We Do</p>
-            <h2 className="font-serif text-4xl md:text-5xl text-ink-900 font-bold max-w-xl">Our Products</h2>
-          </div>
+          <Box>
+            <Typography component="p" className="text-[11px] tracking-[0.2em] uppercase text-gold mb-3">What We Do</Typography>
+            <Typography variant="h2" component="h2" className="font-serif text-4xl md:text-5xl text-ink-900 font-bold max-w-xl">Our Products</Typography>
+          </Box>
           <Link href="/services" className="inline-flex items-center gap-2 text-gold font-semibold tracking-wide hover:gap-4 transition-all">
             View All Services
             <ArrowRight className="w-4 h-4" />
@@ -67,25 +70,25 @@ export function ServicesGrid() {
         </AnimatedContainer>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {services.map((s, i) => (
             <AnimatedContainer key={s.title} delay={i * 0.05}>
               <Link
                 href={s.href}
                 className="group block bg-white border border-ink-100 rounded-2xl p-7 h-full hover:border-gold hover:shadow-lg transition-all duration-300 cursor-pointer"
               >
-                <span className="text-[11px] font-semibold tracking-[0.15em] uppercase text-ink-500 group-hover:text-gold transition-colors">
+                <Typography component="span" className="text-[11px] font-semibold tracking-[0.15em] uppercase text-ink-500 group-hover:text-gold transition-colors">
                   0{i + 1}
-                </span>
-                <h3 className="font-serif text-2xl text-ink-900 mt-6 mb-3">
+                </Typography>
+                <Typography variant="h3" component="h3" className="font-serif text-2xl text-ink-900 mt-6 mb-3">
                   {s.title}
-                </h3>
-                <p className="text-sm text-ink-600 leading-relaxed">{s.desc}</p>
+                </Typography>
+                <Typography component="p" className="text-sm text-ink-600 leading-relaxed">{s.desc}</Typography>
               </Link>
             </AnimatedContainer>
           ))}
-        </div>
-      </div>
-    </section>
+        </Box>
+      </Box>
+    </Box>
   );
 }

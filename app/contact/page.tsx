@@ -1,158 +1,216 @@
 "use client";
+import { useState } from "react";
 import { AnimatedContainer } from "@/components/ui/AnimatedContainer";
 import { CONTACT_INFO, PHONE, PHONE_DISPLAY, MAPS_URL, WHATSAPP_URL } from "@/lib/constants";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Box, Typography } from "@mui/material";
+import { submitContactForm } from "@/app/actions/contact";
+
 
 export default function ContactPage() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
+    
+    try {
+      const formData = new FormData(e.currentTarget);
+      const result = await submitContactForm(formData);
+      
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setError(result.error || "Something went wrong.");
+      }
+    } catch (err) {
+      setError("Failed to connect to the server.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <div className="bg-surface-body min-h-screen pt-20">
+    <Box className="bg-surface-body min-h-screen pt-20">
       
       {/* Hero */}
-      <section className="py-24 border-b border-ink-200 text-center bg-white">
-        <div className="max-w-4xl mx-auto px-6">
+      <Box component="section" className="py-24 border-b border-ink-200 text-center bg-white">
+        <Box className="max-w-4xl mx-auto px-6">
           <AnimatedContainer>
-            <p className="text-[11px] tracking-[0.2em] uppercase text-gold mb-6 font-semibold">Contact Us</p>
-            <h1 className="font-serif text-5xl md:text-7xl text-ink-950 font-bold mb-8 leading-[1.1]">
+            <Typography component="p" className="text-[11px] tracking-[0.2em] uppercase text-gold mb-6 font-semibold">Contact Us</Typography>
+            <Typography variant="h1" component="h1" className="font-serif text-5xl md:text-7xl text-ink-950 font-bold mb-8 leading-[1.1]">
               Start Your Project
-            </h1>
-            <p className="text-ink-600 font-medium text-lg max-w-2xl mx-auto">
+            </Typography>
+            <Typography component="p" className="text-ink-600 font-medium text-lg max-w-2xl mx-auto">
               Visit our showroom in RS Puram or reach out online. 
               Our experts are ready to assist with your architectural glass requirements.
-            </p>
+            </Typography>
           </AnimatedContainer>
-        </div>
-      </section>
+        </Box>
+      </Box>
 
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="grid lg:grid-cols-[1fr_1.5fr] gap-16 lg:gap-24 items-start">
+      <Box component="section" className="py-24">
+        <Box className="max-w-7xl mx-auto px-6 lg:px-10">
+          <Box className="grid lg:grid-cols-[1fr_1.5fr] gap-16 lg:gap-24 items-start">
             
             {/* Contact Info */}
             <AnimatedContainer>
-              <h2 className="font-serif text-3xl text-ink-950 font-bold mb-10">Get in Touch</h2>
+              <Typography variant="h2" component="h2" className="font-serif text-3xl text-ink-950 font-bold mb-10">Get in Touch</Typography>
               
-              <div className="space-y-10">
+              <Box className="space-y-10">
                 {/* Address */}
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 rounded-full border border-ink-200 bg-white shadow-sm flex items-center justify-center flex-shrink-0">
+                <Box className="flex gap-6">
+                  <Box className="w-12 h-12 rounded-full border border-ink-200 bg-white shadow-sm flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-5 h-5 text-gold" />
-                  </div>
-                  <div>
-                    <h3 className="text-ink-900 font-semibold mb-2">Showroom Address</h3>
-                    <p className="text-ink-600 font-medium text-sm leading-relaxed max-w-[250px] mb-3">
+                  </Box>
+                  <Box>
+                    <Typography variant="h3" component="h3" className="text-ink-900 font-semibold mb-2">Showroom Address</Typography>
+                    <Typography component="p" className="text-ink-600 font-medium text-sm leading-relaxed max-w-[250px] mb-3">
                       {CONTACT_INFO.address}
-                    </p>
+                    </Typography>
                     <a href={MAPS_URL} target="_blank" rel="noreferrer" className="text-xs font-bold text-gold tracking-widest uppercase hover:underline">
                       Get Directions
                     </a>
-                  </div>
-                </div>
+                  </Box>
+                </Box>
 
                 {/* Phone */}
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 rounded-full border border-ink-200 bg-white shadow-sm flex items-center justify-center flex-shrink-0">
+                <Box className="flex gap-6">
+                  <Box className="w-12 h-12 rounded-full border border-ink-200 bg-white shadow-sm flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5 text-gold" />
-                  </div>
-                  <div>
-                    <h3 className="text-ink-900 font-semibold mb-2">Phone & WhatsApp</h3>
-                    <div className="space-y-2">
+                  </Box>
+                  <Box>
+                    <Typography variant="h3" component="h3" className="text-ink-900 font-semibold mb-2">Phone & WhatsApp</Typography>
+                    <Box className="space-y-2">
                       <a href={`tel:${PHONE}`} className="block text-ink-600 font-medium text-sm hover:text-gold transition-colors">
                         {PHONE_DISPLAY}
                       </a>
                       <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="text-xs font-bold text-[#25D366] tracking-widest uppercase hover:underline block">
                         Chat on WhatsApp
                       </a>
-                    </div>
-                  </div>
-                </div>
+                    </Box>
+                  </Box>
+                </Box>
 
                 {/* Email */}
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 rounded-full border border-ink-200 bg-white shadow-sm flex items-center justify-center flex-shrink-0">
+                <Box className="flex gap-6">
+                  <Box className="w-12 h-12 rounded-full border border-ink-200 bg-white shadow-sm flex items-center justify-center flex-shrink-0">
                     <Mail className="w-5 h-5 text-gold" />
-                  </div>
-                  <div>
-                    <h3 className="text-ink-900 font-semibold mb-2">Email Address</h3>
+                  </Box>
+                  <Box>
+                    <Typography variant="h3" component="h3" className="text-ink-900 font-semibold mb-2">Email Address</Typography>
                     <a href={`mailto:${CONTACT_INFO.email}`} className="text-ink-600 font-medium text-sm hover:text-gold transition-colors break-all">
                       {CONTACT_INFO.email}
                     </a>
-                  </div>
-                </div>
+                  </Box>
+                </Box>
 
                 {/* Hours */}
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 rounded-full border border-ink-200 bg-white shadow-sm flex items-center justify-center flex-shrink-0">
+                <Box className="flex gap-6">
+                  <Box className="w-12 h-12 rounded-full border border-ink-200 bg-white shadow-sm flex items-center justify-center flex-shrink-0">
                     <Clock className="w-5 h-5 text-gold" />
-                  </div>
-                  <div>
-                    <h3 className="text-ink-900 font-semibold mb-2">Working Hours</h3>
-                    <p className="text-ink-600 font-medium text-sm">Mon - Sat: 9:30 AM - 7:30 PM</p>
-                    <p className="text-ink-500 font-medium text-sm mt-1">Sunday: Closed</p>
-                  </div>
-                </div>
-              </div>
+                  </Box>
+                  <Box>
+                    <Typography variant="h3" component="h3" className="text-ink-900 font-semibold mb-2">Working Hours</Typography>
+                    <Typography component="p" className="text-ink-600 font-medium text-sm">Mon - Sat: 9:30 AM - 7:30 PM</Typography>
+                    <Typography component="p" className="text-ink-500 font-medium text-sm mt-1">Sunday: Closed</Typography>
+                  </Box>
+                </Box>
+              </Box>
             </AnimatedContainer>
 
             {/* Contact Form */}
             <AnimatedContainer delay={0.2}>
-              <div className="bg-white border border-ink-200 shadow-sm p-8 md:p-12 rounded-2xl">
-                <h2 className="font-serif text-3xl text-ink-950 font-bold mb-8">Send an Inquiry</h2>
-                <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="fullName" className="text-xs font-semibold tracking-wider text-ink-500 uppercase">Full Name</label>
+              <Box className="bg-white border border-ink-200 shadow-sm p-8 md:p-12 rounded-2xl">
+                <Typography variant="h2" component="h2" className="font-serif text-3xl text-ink-950 font-bold mb-8">Send an Inquiry</Typography>
+                
+                {submitted ? (
+                  <Box className="text-center py-8">
+                    <Typography variant="h3" component="h3" className="text-2xl font-bold text-gold mb-4">Thank You!</Typography>
+                    <Typography component="p" className="text-ink-600">Your request has been received. Our team will contact you shortly.</Typography>
+                  </Box>
+                ) : (
+                  <form className="space-y-6" onSubmit={handleSubmit}>
+                    
+                    <Box className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <Box className="space-y-2">
+                        <label htmlFor="name" className="text-xs font-semibold tracking-wider text-ink-500 uppercase">Full Name</label>
+                        <input 
+                          id="name"
+                          name="name"
+                          type="text" 
+                          required
+                          className="w-full bg-surface-body border border-ink-200 rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all"
+                          placeholder="John Doe"
+                        />
+                      </Box>
+                      <Box className="space-y-2">
+                        <label htmlFor="phone" className="text-xs font-bold tracking-wider text-ink-600 uppercase">Phone Number</label>
+                        <input 
+                          id="phone"
+                          name="phone"
+                          type="tel" 
+                          required
+                          className="w-full bg-surface-body border border-ink-200 rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all"
+                          placeholder="+91 90000 00000"
+                        />
+                      </Box>
+                    </Box>
+
+                    <Box className="space-y-2">
+                      <label htmlFor="email" className="text-xs font-bold tracking-wider text-ink-600 uppercase">Email Address</label>
                       <input 
-                        id="fullName"
-                        name="fullName"
-                        type="text" 
+                        id="email"
+                        name="email"
+                        type="email" 
+                        required
                         className="w-full bg-surface-body border border-ink-200 rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all"
-                        placeholder="John Doe"
+                        placeholder="john@example.com"
                       />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="phoneNumber" className="text-xs font-bold tracking-wider text-ink-600 uppercase">Phone Number</label>
-                      <input 
-                        id="phoneNumber"
-                        name="phoneNumber"
-                        type="tel" 
-                        className="w-full bg-surface-body border border-ink-200 rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all"
-                        placeholder="+91 90000 00000"
+                    </Box>
+
+                    <Box className="space-y-2">
+                      <label htmlFor="message" className="text-xs font-bold tracking-wider text-ink-600 uppercase">Requirement</label>
+                      <textarea 
+                        id="message"
+                        name="message"
+                        rows={4}
+                        required
+                        className="w-full bg-[#F8FAFC] border border-ink-200 rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all resize-none"
+                        placeholder="Tell us about your glass or plywood requirements..."
                       />
-                    </div>
-                  </div>
+                    </Box>
 
-                  <div className="space-y-2">
-                    <label htmlFor="requirement" className="text-xs font-bold tracking-wider text-ink-600 uppercase">Requirement</label>
-                    <textarea 
-                      id="requirement"
-                      name="requirement"
-                      rows={4}
-                      className="w-full bg-[#F8FAFC] border border-ink-200 rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all resize-none"
-                      placeholder="Tell us about your glass or plywood requirements..."
-                    />
-                  </div>
+                    {error && (
+                      <Typography component="p" className="text-red-500 text-sm mt-2">{error}</Typography>
+                    )}
 
-                  <button 
-                    type="submit"
-                    className="w-full bg-gold text-ink-950 font-bold py-4 rounded-xl hover:bg-gold-dark hover:scale-105 transition-all shadow-md shadow-gold/20 mt-4 tracking-wide"
-                  >
-                    Submit Request
-                  </button>
+                    <button 
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-gold text-ink-950 font-bold py-4 rounded-xl hover:bg-gold-dark hover:scale-105 transition-all shadow-md shadow-gold/20 mt-4 tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? "Sending..." : "Submit Request"}
+                    </button>
 
-                  <p className="text-xs text-ink-500 text-center mt-6">
-                    For urgent requirements, please contact us directly via phone or WhatsApp.
-                  </p>
-                </form>
-              </div>
+                    <Typography component="p" className="text-xs text-ink-500 text-center mt-6">
+                      For urgent requirements, please contact us directly via phone or WhatsApp.
+                    </Typography>
+                  </form>
+                )}
+
+              </Box>
             </AnimatedContainer>
             
-          </div>
-        </div>
-      </section>
+          </Box>
+        </Box>
+      </Box>
 
       {/* Map Section */}
-      <section className="h-[400px] w-full border-t border-ink-200">
+      <Box component="section" className="h-[400px] w-full border-t border-ink-200">
         <iframe 
           src="https://maps.google.com/maps?width=100%25&height=100%25&hl=en&q=Rajendra%20Glass%20House,%20Coimbatore&t=&z=15&ie=UTF8&iwloc=B&output=embed" 
           width="100%" 
@@ -162,7 +220,7 @@ export default function ContactPage() {
           loading="lazy" 
           referrerPolicy="no-referrer-when-downgrade"
         />
-      </section>
-    </div>
+      </Box>
+    </Box>
   );
 }
