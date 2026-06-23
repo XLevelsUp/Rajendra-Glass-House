@@ -1,6 +1,7 @@
 "use client";
 import { AnimatedContainer } from "@/components/ui/AnimatedContainer";
 import { Box, Typography } from "@mui/material";
+import { PHONE_DISPLAY } from "@/lib/constants";
 
 
 export default function TermsOfServicePage() {
@@ -46,6 +47,7 @@ export default function TermsOfServicePage() {
               </Box>
 
               <Box component="section">
+
                 <Typography variant="h2" component="h2" className="font-serif text-2xl text-ink-950 font-bold mb-4">3. Quotations and Pricing</Typography>
                 <Typography component="p">
                   All quotes provided through our website or via direct contact are valid for 15 days unless otherwise specified. Pricing may be subject to change based on exact site measurements, material availability, or unforeseen structural requirements discovered during installation. Full payment terms will be provided prior to project commencement.
@@ -63,6 +65,18 @@ export default function TermsOfServicePage() {
                 <Typography variant="h2" component="h2" className="font-serif text-2xl text-ink-950 font-bold mb-4">5. Governing Law</Typography>
                 <Typography component="p">
                   These terms and conditions are governed by and construed in accordance with the laws of Tamil Nadu, India, and you irrevocably submit to the exclusive jurisdiction of the courts in Coimbatore.
+                </Typography>
+              </Box>
+
+              <Box component="section">
+                <Typography variant="h2" component="h2" className="font-serif text-2xl text-ink-950 font-bold mb-4">6. Contact Details</Typography>
+                <Typography component="p">
+                  If you have any questions about these Terms of Service, please contact us at:
+                  <br /><br />
+                  <strong className="text-ink-900">Rajendra Glass House</strong><br />
+                  847, MTP Road, (Near Flower Market), Coimbatore - 02.<br />
+                  Email: rajendraglasshouse@gmail.com<br />
+                  Phone: {PHONE_DISPLAY}
                 </Typography>
               </Box>
 

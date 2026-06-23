@@ -128,6 +128,14 @@ const products = [
     desc: "Aesthetic and functional glass blocks perfect for partitions, decorative walls, and allowing natural light while maintaining privacy.",
     features: ["High light transmission", "Thermal and sound insulation", "Durable and secure", "Various patterns and colors"],
     image: "/services/glass-blocks.webp"
+  },
+  {
+    id: "led-smart-mirrors",
+    title: "LED Smart Mirrors",
+    subtitle: "Modern Illumination",
+    desc: "Premium LED smart mirrors featuring integrated lighting, touch controls, and anti-fog technology for a luxurious experience.",
+    features: ["Integrated LED lighting", "Touch sensor controls", "Anti-fog functionality", "Energy efficient"],
+    image: "/services/led-smart-mirrors.webp"
   }
 ];
 

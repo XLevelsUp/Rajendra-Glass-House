@@ -10,24 +10,82 @@ import { submitContactForm } from "@/app/actions/contact";
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<{name?: string; phone?: string; email?: string; submit?: string}>({});
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: ""
+  });
+
+  const validateField = (field: string, value: string) => {
+    let errorMsg = undefined;
+    if (field === "name") {
+      if (value.trim().length > 0 && (value.trim().length < 3 || value.trim().length > 50)) {
+        errorMsg = "Please enter a valid full name (3-50 characters).";
+      }
+    } else if (field === "phone") {
+      const phoneStr = value.replace(/[\s-]/g, '');
+      const phoneRegex = /^\+?\d{10,15}$/;
+      if (value.trim().length > 0 && !phoneRegex.test(phoneStr)) {
+        errorMsg = "Please enter a valid phone number (10-15 digits).";
+      }
+    } else if (field === "email") {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (value.trim().length > 0 && (!emailRegex.test(value) || value.toLowerCase().match(/\.comm+$/))) {
+        errorMsg = "Please enter a valid email address.";
+      }
+    }
+    
+    setErrors(prev => ({ ...prev, [field]: errorMsg, submit: undefined }));
+    return errorMsg;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    validateField(name, value);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError(null);
+    setErrors({});
     
     try {
       const formData = new FormData(e.currentTarget);
+      
+      const name = formData.get("name") as string;
+      const phone = formData.get("phone") as string;
+      const email = formData.get("email") as string;
+      
+      let hasError = false;
+      const newErrors: typeof errors = {};
+      
+      const nameError = validateField("name", name);
+      if (nameError || !name) { newErrors.name = nameError || "Please enter a valid full name (3-50 characters)."; hasError = true; }
+      
+      const phoneError = validateField("phone", phone);
+      if (phoneError || !phone) { newErrors.phone = phoneError || "Please enter a valid phone number (10-15 digits)."; hasError = true; }
+      
+      const emailError = validateField("email", email);
+      if (emailError || !email) { newErrors.email = emailError || "Please enter a valid email address."; hasError = true; }
+      
+      if (hasError) {
+        setErrors(newErrors);
+        setIsSubmitting(false);
+        return;
+      }
+
       const result = await submitContactForm(formData);
       
       if (result.success) {
         setSubmitted(true);
       } else {
-        setError(result.error || "Something went wrong.");
+        setErrors({ submit: result.error || "Something went wrong." });
       }
     } catch (err) {
-      setError("Failed to connect to the server.");
+      setErrors({ submit: "Failed to connect to the server." });
     } finally {
       setIsSubmitting(false);
     }
@@ -143,9 +201,11 @@ export default function ContactPage() {
                           name="name"
                           type="text" 
                           required
-                          className="w-full bg-surface-body border border-ink-200 rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all"
-                          placeholder="John Doe"
+                          value={formData.name}
+                          onChange={handleChange}
+                          className={`w-full bg-surface-body border ${errors.name ? 'border-red-500 focus-visible:ring-red-500' : 'border-ink-200 focus-visible:ring-gold'} rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 transition-all`}
                         />
+                        {errors.name && <Typography component="p" className="text-red-500 text-xs mt-1">{errors.name}</Typography>}
                       </Box>
                       <Box className="space-y-2">
                         <label htmlFor="phone" className="text-xs font-bold tracking-wider text-ink-600 uppercase">Phone Number</label>
@@ -154,9 +214,11 @@ export default function ContactPage() {
                           name="phone"
                           type="tel" 
                           required
-                          className="w-full bg-surface-body border border-ink-200 rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all"
-                          placeholder="+91 90000 00000"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          className={`w-full bg-surface-body border ${errors.phone ? 'border-red-500 focus-visible:ring-red-500' : 'border-ink-200 focus-visible:ring-gold'} rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 transition-all`}
                         />
+                        {errors.phone && <Typography component="p" className="text-red-500 text-xs mt-1">{errors.phone}</Typography>}
                       </Box>
                     </Box>
 
@@ -167,9 +229,11 @@ export default function ContactPage() {
                         name="email"
                         type="email" 
                         required
-                        className="w-full bg-surface-body border border-ink-200 rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all"
-                        placeholder="john@example.com"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className={`w-full bg-surface-body border ${errors.email ? 'border-red-500 focus-visible:ring-red-500' : 'border-ink-200 focus-visible:ring-gold'} rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 transition-all`}
                       />
+                      {errors.email && <Typography component="p" className="text-red-500 text-xs mt-1">{errors.email}</Typography>}
                     </Box>
 
                     <Box className="space-y-2">
@@ -178,14 +242,14 @@ export default function ContactPage() {
                         id="message"
                         name="message"
                         rows={4}
-                        required
+                        value={formData.message}
+                        onChange={handleChange}
                         className="w-full bg-[#F8FAFC] border border-ink-200 rounded-sm px-4 py-3 text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold transition-all resize-none"
-                        placeholder="Tell us about your glass or plywood requirements..."
                       />
                     </Box>
 
-                    {error && (
-                      <Typography component="p" className="text-red-500 text-sm mt-2">{error}</Typography>
+                    {errors.submit && (
+                      <Typography component="p" className="text-red-500 text-sm mt-2">{errors.submit}</Typography>
                     )}
 
                     <button 

@@ -89,9 +89,9 @@ export function Footer() {
               {[
                 { label: "Toughened Glass", href: "/services#toughened-glass" },
                 { label: "Shower Enclosures", href: "/services#shower-enclosures" },
-                { label: "Glass Railings", href: "/services#glass-railings" },
-                { label: "Office Partitions", href: "/services#office-partitions" },
-                { label: "LED Smart Mirrors", href: "/services#led-mirrors" },
+                { label: "Glass Railings", href: "/services#glass-railing" },
+                { label: "Office Partitions", href: "/services#glass-partition" },
+                { label: "LED Smart Mirrors", href: "/services#led-smart-mirrors" },
               ].map(s => (
                 <Box component="li" key={s.href}>
                   <Link href={s.href} className="text-ink-300 hover:text-gold text-sm transition-colors duration-200 font-medium p-2 -m-2 inline-block">
