@@ -1,6 +1,7 @@
 "use client";
 import { AnimatedContainer } from "@/components/ui/AnimatedContainer";
 import { Box, Typography } from "@mui/material";
+import { PHONE_DISPLAY } from "@/lib/constants";
 
 
 export default function PrivacyPolicyPage() {
@@ -58,6 +59,7 @@ export default function PrivacyPolicyPage() {
               </Box>
 
               <Box component="section">
+
                 <Typography variant="h2" component="h2" className="font-serif text-2xl text-ink-950 font-bold mb-4">4. Data Security</Typography>
                 <Typography component="p">
                   We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorised way, altered or disclosed. In addition, we limit access to your personal data to those employees, agents, contractors and other third parties who have a business need to know.
@@ -72,7 +74,7 @@ export default function PrivacyPolicyPage() {
                   <strong className="text-ink-900">Rajendra Glass House</strong><br />
                   847, MTP Road, (Near Flower Market), Coimbatore - 02.<br />
                   Email: rajendraglasshouse@gmail.com<br />
-                  Phone: +91 93610 77777
+                  Phone: {PHONE_DISPLAY}
                 </Typography>
               </Box>
 
