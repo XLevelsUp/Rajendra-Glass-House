@@ -14,6 +14,7 @@ export function Header() {
   const [open, setOpen] = React.useState(false)
   const [scrolled, setScrolled] = React.useState(false)
   const pathname = usePathname()
+  const isHeaderSolid = scrolled || pathname !== "/"
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -30,10 +31,10 @@ export function Header() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={cn(
-        "fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300",
-        scrolled
-          ? "bg-surface-body border-b border-[#E2E3EB] shadow-[0_4px_24px_rgba(0,0,0,0.08)] py-3"
-          : "bg-surface-body backdrop-blur-md border-b border-white/60 shadow-[0_2px_16px_rgba(0,0,0,0.06)] py-4"
+        "fixed top-0 left-0 right-0 w-full z-50 transition-all duration-500",
+        isHeaderSolid
+          ? "bg-surface-body border-b border-[#E2E3EB] shadow-[0_4px_24px_rgba(0,0,0,0.08)] py-1.5"
+          : "bg-transparent border-b border-white/10 py-3"
       )}
     >
       <Box className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -43,12 +44,13 @@ export function Header() {
           <Link href="/" className="flex-shrink-0" title="glass house Coimbatore">
             <Typography component="span" className="sr-only">Rajendra glass house Coimbatore</Typography>
             <Image
-              src="/Rajendra_glass_house_logo.svg"
+              src="/Rajendra_Logo.svg"
               alt="Rajendra glass house Coimbatore"
-              width={160}
-              height={48}
+              width={512}
+              height={512}
+              className="h-14 md:h-16 w-[200px] md:w-[240px] object-contain object-left"
               priority
-              className="h-10 w-auto"
+              unoptimized
             />
           </Link>
 
@@ -59,10 +61,10 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "text-[11px] font-semibold tracking-[0.15em] uppercase transition-colors duration-200 relative group",
+                  "text-[11px] font-semibold tracking-[0.15em] uppercase transition-colors duration-300 relative group",
                   pathname === link.href
                     ? "text-gold"
-                    : "text-ink-700 hover:text-gold"
+                    : isHeaderSolid ? "text-ink-700 hover:text-gold" : "text-white/85 hover:text-gold"
                 )}
               >
                 {link.label}
@@ -79,7 +81,10 @@ export function Header() {
             <Typography
               component="a"
               href={`tel:${PHONE}`}
-              className="text-[12px] text-ink-600 hover:text-gold transition-colors tracking-wide font-semibold"
+              className={cn(
+                "text-[12px] hover:text-gold transition-colors tracking-wide font-semibold duration-300",
+                isHeaderSolid ? "text-ink-600" : "text-white/75"
+              )}
             >
               {PHONE_DISPLAY}
             </Typography>
@@ -95,7 +100,10 @@ export function Header() {
           <Box
             component="button"
             onClick={() => setOpen(!open)}
-            className="lg:hidden text-ink-800 hover:text-gold transition-colors p-1.5 rounded-lg hover:bg-ink-100"
+            className={cn(
+              "lg:hidden transition-colors p-1.5 rounded-lg",
+              isHeaderSolid ? "text-ink-800 hover:text-gold hover:bg-ink-100" : "text-white/85 hover:text-gold hover:bg-white/10"
+            )}
             aria-label="Toggle navigation"
           >
             <AnimatePresence mode="wait" initial={false}>

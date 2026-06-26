@@ -9,7 +9,7 @@ const reasons = [
   {
     Icon: Gem,
     title: "Premium Quality Materials",
-    desc: "Sourcing only the finest architectural glass and luxury plywood for unparalleled excellence.",
+    desc: "Sourcing only the finest architectural glass for unparalleled excellence.",
   },
   {
     Icon: Wand2,
@@ -45,7 +45,7 @@ export function WhyChooseUs() {
           </Typography>
           <Box className="gold-separator mx-auto mb-6" />
           <Typography component="p" className="text-ink-600 text-[15px] leading-relaxed max-w-2xl mx-auto font-medium">
-            We combine decades of technical expertise with premium materials to deliver architectural glass and plywood
+            We combine decades of technical expertise with premium materials to deliver architectural glass
             solutions that stand the test of time.
           </Typography>
         </AnimatedContainer>

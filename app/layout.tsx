@@ -44,7 +44,11 @@ export const metadata: Metadata = {
     title: "Rajendra Glass House | Premium Glass & Mirror Shop in Coimbatore",
     description:
       "Coimbatore's trusted glass shop since 1977. Toughened glass, mirrors, shower enclosures, office partitions & more.",
-    images: [{ url: "/Rajendra_glass_house_logo.svg", width: 800, height: 600, alt: "Rajendra Glass House Logo" }],
+    images: [{ url: "/Rajendra_Logo.svg", width: 800, height: 800, alt: "Rajendra Glass House Logo" }],
+  },
+  icons: {
+    icon: "/Rajendra_Logo.svg",
+    apple: "/Rajendra_Logo.svg",
   },
   twitter: {
     card: "summary_large_image",

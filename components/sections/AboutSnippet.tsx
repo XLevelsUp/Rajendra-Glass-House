@@ -1,70 +1,93 @@
 "use client";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { AnimatedContainer } from "@/components/ui/AnimatedContainer";
+import Link from "next/link";
+import Image from "next/image";
 import { Box, Typography } from "@mui/material";
 
-
-const stats = [
-  { value: "45+", label: "Years of Experience", desc: "Est. 1977" },
-  { value: "10k+", label: "Successful Projects", desc: "Across Tamil Nadu" },
-  { value: "100%", label: "Quality Assured", desc: "Saint Gobain Certified" },
+const images = [
+  { src: "/about/lacquered-glass.webp", label: "Lacquered glass", aspect: "aspect-[4/3]", href: "/products" },
+  { src: "/about/groove-mirror-glass.webp", label: "Groove mirror glass", aspect: "aspect-[3/4]", href: "/products" },
+  { src: "/about/glass-pillars.webp", label: "Glass pillars", aspect: "aspect-[4/3] lg:aspect-[16/10]", href: "/products" },
+  { src: "/about/vetropieno-glass-brick.webp", label: "Vetropieno glass brick", aspect: "aspect-[16/9]", href: "/products" },
 ];
+
+const ImageBlock = ({ img, className = "" }: { img: any, className?: string }) => (
+  <Link href={img.href} className={`flex flex-col gap-3 group/link block ${className}`}>
+    <Box className={`relative w-full bg-ink-200 overflow-hidden ${img.aspect} group cursor-pointer`}>
+      {/* Placeholder Background */}
+      <Box className="absolute inset-0 bg-ink-100 flex items-center justify-center p-6 text-center border border-ink-200/60 transition-colors group-hover:bg-ink-100/80">
+        <Typography component="span" className="font-serif text-ink-400 font-medium text-lg capitalize">
+          [Image: {img.label}]
+        </Typography>
+      </Box>
+
+      {/* Actual Image Tag */}
+      <Image src={img.src} alt={img.label} fill className="object-cover relative z-10" /> 
+
+      {/* Plus Icon Overlay - Removed as requested */}
+    </Box>
+    <Typography component="p" className="text-[15px] text-ink-950 font-medium tracking-wide group-hover/link:text-gold transition-colors">
+      {img.label}
+    </Typography>
+  </Link>
+);
 
 export function AboutSnippet() {
   return (
-    <Box component="section" className="py-24 bg-white border-b border-ink-100">
-      <Box className="max-w-7xl mx-auto px-6 lg:px-10">
-        <Box className="max-w-3xl mx-auto text-center">
+    <Box component="section" className="py-24 md:py-32 bg-[#FAF9F6]">
+      <Box className="max-w-[1300px] mx-auto px-6 lg:px-12">
+        <Box className="grid md:grid-cols-2 gap-12 lg:gap-24">
 
-          <AnimatedContainer delay={0.05}>
-            <Typography component="span" className="section-kicker mb-4 block">Our Story</Typography>
-          </AnimatedContainer>
+          {/* Left Column */}
+          <Box className="flex flex-col gap-12 lg:gap-24">
+            <AnimatedContainer>
+              <ImageBlock img={images[0]} />
+            </AnimatedContainer>
+            <AnimatedContainer delay={0.1}>
+              <ImageBlock img={images[1]} />
+            </AnimatedContainer>
+          </Box>
 
-          <AnimatedContainer delay={0.1}>
-            <Typography variant="h2" component="h2" className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-ink-950 mb-6 tracking-tight leading-tight">
-              Crafting Excellence Since 1977
-            </Typography>
-          </AnimatedContainer>
+          {/* Right Column */}
+          <Box className="flex flex-col gap-12 lg:gap-24">
 
-          <AnimatedContainer delay={0.2}>
-            <Box className="gold-separator mx-auto mb-8" />
-            <Typography component="p" className="text-ink-600 text-lg md:text-xl leading-relaxed mb-12 font-medium">
-              As the premier{" "}
-              <strong className="text-gold font-semibold">Glass Suppliers in Tamil Nadu</strong>, we merge decades of
-              architectural glass expertise with modern designs and the highest quality materials. Whether you are
-              outfitting a luxury residence or a corporate high-rise, our premium glass and plywood solutions ensure
-              durability, elegance, and unparalleled craftsmanship.
-            </Typography>
-          </AnimatedContainer>
+            {/* Text Block */}
+            <AnimatedContainer delay={0.2} className="md:-mt-2">
+              <Typography variant="h2" component="h2" className="font-serif text-[2.5rem] md:text-[3.2rem] text-ink-950 font-bold leading-[1.15] mb-8 tracking-tight">
+                Crafting Excellence<br />
+                Since 1977
+              </Typography>
 
-          {/* Stats grid */}
-          <AnimatedContainer delay={0.3}>
-            <Box className="grid grid-cols-3 gap-0 border border-ink-100 rounded-2xl overflow-hidden mb-10">
-              {stats.map((stat, i) => (
-                <Box
-                  key={stat.label}
-                  className={`flex flex-col items-center py-8 px-4 bg-white hover:bg-[#FEFDF8] transition-colors duration-300 ${
-                    i < stats.length - 1 ? "border-r border-ink-100" : ""
-                  }`}
+              <Box className="space-y-6 text-[1.05rem] leading-[1.7] font-medium max-w-[90%] text-ink-800">
+                <Typography component="p">
+                  As the premier Glass Suppliers in Tamil Nadu, we merge decades of architectural glass expertise with modern designs and the highest quality materials.
+                </Typography>
+
+                <Typography component="p">
+                  Whether you are outfitting a luxury residence or a corporate high-rise, our premium glass solutions ensure durability, elegance, and unparalleled craftsmanship.
+                </Typography>
+              </Box>
+
+              <Box className="mt-8">
+                <Link
+                  href="/about"
+                  className="inline-block text-[15px] font-bold uppercase tracking-wider text-gold hover:text-gold-dark transition-colors"
+                  style={{ borderBottom: '2px solid #C9A84C', paddingBottom: '2px' }}
                 >
-                  <Typography component="span" className="font-serif text-3xl md:text-4xl font-bold text-gold mb-1.5">{stat.value}</Typography>
-                  <Typography component="span" className="text-[11px] font-bold tracking-widest uppercase text-ink-800 mb-0.5">{stat.label}</Typography>
-                  <Typography component="span" className="text-[10px] font-medium text-ink-500 tracking-wider uppercase">{stat.desc}</Typography>
-                </Box>
-              ))}
-            </Box>
-          </AnimatedContainer>
+                  Learn more about us
+                </Link>
+              </Box>
+            </AnimatedContainer>
 
-          <AnimatedContainer delay={0.4}>
-            <Link
-              href="/about"
-              className="group inline-flex items-center gap-2 text-sm font-bold text-gold hover:text-gold-dark transition-colors tracking-wide uppercase"
-            >
-              Learn More About Us
-              <ArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-1" />
-            </Link>
-          </AnimatedContainer>
+            <AnimatedContainer delay={0.3}>
+              <ImageBlock img={images[2]} />
+            </AnimatedContainer>
+
+            <AnimatedContainer delay={0.4}>
+              <ImageBlock img={images[3]} />
+            </AnimatedContainer>
+
+          </Box>
 
         </Box>
       </Box>

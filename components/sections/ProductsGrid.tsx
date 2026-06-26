@@ -1,38 +1,23 @@
 "use client";
 import { AnimatedContainer } from "@/components/ui/AnimatedContainer";
 import Link from "next/link";
+import Image from "next/image";
 import { Box, Typography } from "@mui/material";
-
-import {
-  Layers,
-  DoorOpen,
-  Shield,
-  Building2,
-  Columns2,
-  Droplets,
-  Fence,
-  Square,
-  Lightbulb,
-  Bath,
-  Hammer,
-  Sparkles,
-  LayoutGrid,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const products = [
-  { name: "Premium Plywoods", Icon: Layers, href: "premium-plywoods" },
-  { name: "Glass Doors", Icon: DoorOpen, href: "glass-doors" },
-  { name: "Tempered Glass", Icon: Shield, href: "tempered-glass" },
-  { name: "Glass Partition", Icon: Building2, href: "glass-partition" },
-  { name: "Wall Mirror", Icon: Columns2, href: "wall-mirror" },
-  { name: "Shower Enclosure", Icon: Droplets, href: "shower-enclosure" },
-  { name: "Glass Railing", Icon: Fence, href: "glass-railing" },
-  { name: "Float Glass", Icon: Square, href: "float-glass" },
-  { name: "LED Mirror", Icon: Lightbulb, href: "led-mirror" },
-  { name: "Bathroom Mirror", Icon: Bath, href: "bathroom-mirror" },
-  { name: "Toughened Glass", Icon: Hammer, href: "toughened-glass" },
-  { name: "Decorative Glass", Icon: Sparkles, href: "decorative-glass" },
-  { name: "Glass Sheets", Icon: LayoutGrid, href: "glass-sheets" },
+  { name: "Glass Doors", src: "glass-doors.webp" },
+  { name: "Tempered Glass", src: "tempered-glass.webp" },
+  { name: "Glass Partition", src: "glass-partition.webp" },
+  { name: "Wall Mirror", src: "wall-mirror.webp" },
+  { name: "Shower Enclosure", src: "shower-enclosure.webp" },
+  { name: "Glass Railing", src: "glass-railing.webp" },
+  { name: "Float Glass", src: "float-glass.webp" },
+  { name: "LED Mirror", src: "led-mirror.webp" },
+  { name: "Bathroom Mirror", src: "bathroom-mirror.webp" },
+  { name: "Toughened Glass", src: "toughened-glass.webp" },
+  { name: "Decorative Glass", src: "decorative-glass.webp" },
+  { name: "Glass Sheets", src: "glass-sheets.webp" },
 ];
 
 export function ProductsGrid() {
@@ -57,40 +42,55 @@ export function ProductsGrid() {
           <AnimatedContainer delay={0.2}>
             <Box className="gold-separator mx-auto mb-6" />
             <Typography component="p" className="text-ink-600 text-lg leading-relaxed font-medium">
-              Explore our extensive collection of premium glass and plywood solutions, engineered for both aesthetic
+              Explore our extensive collection of premium glass solutions, engineered for both aesthetic
               brilliance and structural durability.
             </Typography>
           </AnimatedContainer>
         </Box>
 
-        {/* Products grid */}
-        <Box className="flex flex-wrap justify-center gap-4">
-          {products.map((product, index) => {
-            const Icon = product.Icon;
-            return (
-              <AnimatedContainer
-                key={product.name}
-                delay={0.05 + index * 0.04}
-                className="w-[calc(50%-0.5rem)] sm:w-[185px] lg:w-[200px]"
-              >
-                <Link href={`/contact?service=${encodeURIComponent(product.name)}`} className="block h-full">
-                  <Box className="group premium-card flex flex-col items-center justify-center text-center p-6 rounded-2xl h-full cursor-pointer min-h-[140px]">
-                    {/* Icon circle */}
-                    <Box className="w-14 h-14 rounded-full bg-gold/8 border border-gold/20 flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-gold/15 group-hover:border-gold/40 group-hover:scale-110">
-                      <Icon
-                        size={22}
-                        className="text-gold/70 group-hover:text-gold transition-colors duration-300"
-                        strokeWidth={1.5}
-                      />
-                    </Box>
-                    <Typography variant="h3" component="h3" className="font-semibold text-[13px] text-ink-800 group-hover:text-gold transition-colors duration-300 leading-tight tracking-wide">
+        {/* Products grid - UI/UX Pro Image Cards (Smaller Size) */}
+        <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4 lg:gap-5">
+          {products.map((product, index) => (
+            <AnimatedContainer
+              key={product.name}
+              delay={0.05 + index * 0.05}
+            >
+              <Link href={`/contact?service=${encodeURIComponent(product.name)}`} className="block w-full h-full">
+                <Box className="group relative rounded-xl overflow-hidden aspect-[4/5] bg-ink-200 flex items-end p-4 md:p-5 cursor-pointer">
+                  
+                  {/* Placeholder fallback behind the image */}
+                  <Box className="absolute inset-0 flex items-center justify-center bg-ink-100 border border-ink-200 p-2 text-center">
+                    <Typography component="span" className="text-ink-400 text-[12px] md:text-sm font-medium capitalize">
                       {product.name}
                     </Typography>
                   </Box>
-                </Link>
-              </AnimatedContainer>
-            );
-          })}
+
+                  {/* Actual image */}
+                  <Image 
+                    src={`/home-products/${product.src}`} 
+                    alt={product.name} 
+                    fill 
+                    className="object-cover transition-transform duration-700 group-hover:scale-105 relative z-10" 
+                  />
+                  
+                  {/* Gradient Overlay for text readability */}
+                  <Box className="absolute inset-0 bg-gradient-to-t from-ink-950/90 via-ink-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500 z-20" />
+                  
+                  {/* Content */}
+                  <Box className="relative z-30 w-full flex items-center justify-between gap-2">
+                    <Typography variant="h3" component="h3" className="font-semibold text-[13px] md:text-[14px] leading-snug text-white tracking-wide">
+                      {product.name}
+                    </Typography>
+                    
+                    <Box className="w-7 h-7 rounded-full flex-shrink-0 bg-white/20 backdrop-blur-md flex items-center justify-center text-white opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 border border-white/30">
+                      <ArrowRight size={12} strokeWidth={2.5} />
+                    </Box>
+                  </Box>
+
+                </Box>
+              </Link>
+            </AnimatedContainer>
+          ))}
         </Box>
 
       </Box>

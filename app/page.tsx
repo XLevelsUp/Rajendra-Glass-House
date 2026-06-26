@@ -3,7 +3,7 @@ import { BrandPartners } from "@/components/sections/BrandPartners";
 import { AboutSnippet } from "@/components/sections/AboutSnippet";
 import { ProductsGrid } from "@/components/sections/ProductsGrid";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
-import { ProjectGallery } from "@/components/sections/ProjectGallery";
+import { ProductGallery } from "@/components/sections/ProductGallery";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
@@ -36,7 +36,7 @@ export default function HomePage() {
       <AboutSnippet />
       <ProductsGrid />
       <WhyChooseUs />
-      <ProjectGallery />
+      <ProductGallery />
       <Testimonials />
       <FAQ />
       <CTASection />
