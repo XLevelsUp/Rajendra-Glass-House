@@ -1,190 +1,216 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Phone } from "lucide-react";
-import { motion } from "framer-motion";
-import { Box, Typography } from "@mui/material";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { ArrowRight, Home, Building2, ChevronDown } from "lucide-react";
 
+/* ─── Animation helpers ──────────────────────────────────────────── */
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 32 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] },
+});
+
+/* ─── Static heading words for stagger animation ─────────────────── */
+const headingWords = ["Premium", "Glass", "&", "Mirror", "Solutions"];
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  /* ── Scroll-based parallax ── */
+  const { scrollY } = useScroll();
+  const imageY          = useTransform(scrollY, [0, 600], ["0%", "18%"]);
+  const imageScale      = useTransform(scrollY, [0, 600], [1, 1.08]);
+  const contentY        = useTransform(scrollY, [0, 400], ["0%", "12%"]);
+  const overlayOpacity  = useTransform(scrollY, [0, 400], [0, 0.35]);
+
   return (
-    <Box component="section" className="relative min-h-screen flex items-center bg-surface-body overflow-hidden pt-20">
+    <section
+      ref={sectionRef}
+      className="relative w-full min-h-screen overflow-hidden bg-ink-950 flex flex-col"
+      aria-label="Hero — Rajendra Glass House"
+    >
+      {/* ══════════════════════════════════════════════════════
+          BACKGROUND: Ken Burns zoom + scroll parallax drift
+      ══════════════════════════════════════════════════════ */}
+      <motion.div
+        className="absolute inset-0 will-change-transform"
+        style={{ y: imageY, scale: imageScale }}
+      >
+        <motion.div
+          className="absolute inset-[-6%]"
+          animate={{
+            scale: [1, 1.08, 1],
+            x:     ["0%", "-2.5%", "0%"],
+            y:     ["0%", "-1.5%", "0%"],
+          }}
+          transition={{
+            duration: 22,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+          }}
+        >
+          <Image
+            src="/hero.png"
+            alt="Premium glass architecture — Rajendra Glass House Coimbatore"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </motion.div>
+      </motion.div>
 
-      {/* ── Decorative ambient blobs ─────────────────────────── */}
-      <Box className="absolute top-[5%] right-[10%] w-[40vw] h-[40vw] rounded-full bg-gold/6 blur-[140px] pointer-events-none" />
-      <Box className="absolute bottom-[5%] left-[5%] w-[30vw] h-[30vw] rounded-full bg-gold/4 blur-[120px] pointer-events-none" />
-
-      {/* ── Subtle gold grid ────────────────────────────────── */}
-      <Box
-        className="absolute inset-0 pointer-events-none opacity-[0.035]"
-        style={{
-          backgroundImage: `linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-        }}
+      {/* ══════════════════════════════════════════════════════
+          GRADIENT OVERLAYS
+      ══════════════════════════════════════════════════════ */}
+      <div className="absolute inset-0 bg-gradient-to-t from-ink-950/90 via-ink-950/50 to-ink-950/20 pointer-events-none z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink-950/80 via-ink-950/30 to-transparent pointer-events-none z-10" />
+      <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-ink-950/65 to-transparent pointer-events-none z-10" />
+      <motion.div
+        className="absolute inset-0 bg-ink-950 pointer-events-none z-10"
+        style={{ opacity: overlayOpacity }}
       />
 
-      {/* ── Main grid ───────────────────────────────────────── */}
-      <Box className="max-w-7xl mx-auto px-6 lg:px-10 w-full relative z-10">
-        <Box className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen py-24">
+      {/* ══════════════════════════════════════════════════════
+          MAIN CONTENT — static, left-aligned
+      ══════════════════════════════════════════════════════ */}
+      <motion.div
+        className="relative z-20 flex-1 flex items-center"
+        style={{ y: contentY }}
+      >
+        <div className="w-full max-w-7xl mx-auto px-6 lg:px-16 py-40 text-left">
 
-          {/* ── Left: Text content ──────────────────────────── */}
-          <Box className="order-2 lg:order-1">
-
-            {/* Kicker badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-            >
-              <Box className="inline-flex items-center gap-3 px-5 py-2.5 bg-white border border-gold/30 shadow-sm rounded-full mb-8">
-                <Typography component="span" className="w-2 h-2 rounded-full bg-gold animate-pulse flex-shrink-0" />
-                <Typography component="span" className="text-[11px] font-bold tracking-[0.2em] uppercase text-ink-600">
-                  Est. 1977 · Expert Craftsmanship
-                </Typography>
-              </Box>
-            </motion.div>
-
-            {/* Eyebrow / SEO Kicker */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
-            >
-              <Typography variant="h2" component="h2" className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-ink-500 mb-4">
-                Rajendra Glass House Coimbatore
-              </Typography>
-            </motion.div>
-
-            {/* H1 */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-              className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-ink-950 leading-[1.05] tracking-tight mb-6"
-            >
-              The Premier{" "}
-              <Typography component="span" className="relative inline-block">
-                <Typography component="span" className="text-gold">Glass Shop</Typography>
-                <motion.span
-                  className="absolute -bottom-1 left-0 h-[3px] bg-gold rounded-full block w-full"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 0.7, delay: 0.9, ease: "easeOut" }}
-                  style={{ transformOrigin: "left" }}
-                />
-              </Typography>
-              <br className="hidden md:block" />
-              {" "}in Coimbatore
-            </motion.h1>
-
-            {/* Body */}
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-              className="text-ink-600 text-lg leading-relaxed mb-10 font-medium max-w-lg"
-            >
-              Elevating interiors as the best glass shop in Coimbatore. Trusted source for luxury architectural glass, mirrors, and premium plywood since 1977.
-            </motion.p>
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
-            >
-              <Link
-                href="/services"
-                className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-gold text-ink-950 text-sm font-bold rounded-xl tracking-wide hover:bg-gold-dark transition-all duration-300 shadow-lg shadow-gold/25 hover:-translate-y-0.5"
-              >
-                Explore Products
-                <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
-              </Link>
-              <Link
-                href="/contact"
-                className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-white border border-ink-200 text-ink-800 text-sm font-semibold rounded-xl hover:border-gold/50 hover:text-gold transition-all duration-300 shadow-sm"
-              >
-                <Phone size={15} />
-                Get Quote
-              </Link>
-            </motion.div>
-
-            {/* Stats strip */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
-              className="flex flex-wrap items-center gap-10 mt-14 pt-10 border-t border-ink-200/60"
-            >
-              {[
-                { val: "45+", label: "Years Experience" },
-                { val: "10k+", label: "Projects Completed" },
-                { val: "100%", label: "Quality Certified" },
-              ].map((stat) => (
-                <Box key={stat.label} className="flex flex-col">
-                  <Typography component="span" className="font-serif text-3xl font-bold text-gold">{stat.val}</Typography>
-                  <Typography component="span" className="text-[11px] font-semibold text-ink-500 uppercase tracking-wider mt-1">{stat.label}</Typography>
-                </Box>
-              ))}
-            </motion.div>
-          </Box>
-
-          {/* ── Right: Glass building image (Ken Burns zoom) ─── */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
-            className="order-1 lg:order-2 relative"
-          >
-            {/* Image frame */}
-            <Box className="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl shadow-ink-900/10">
-              <motion.div
-                className="w-full h-full"
-                animate={{ scale: [1, 1.06] }}
-                transition={{ duration: 22, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-              >
-                <Image
-                  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80"
-                  alt="Glass architecture facade — Rajendra Glass House"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </motion.div>
-              {/* Subtle bottom vignette only */}
-              <Box className="absolute inset-0 bg-gradient-to-t from-ink-950/15 to-transparent pointer-events-none" />
-            </Box>
-
-            {/* Floating: Saint Gobain badge */}
-            <motion.div
-              animate={{ y: [-4, 4, -4] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-8 -left-5 bg-white rounded-2xl px-4 py-3 shadow-xl border border-ink-100 flex items-center gap-3"
-            >
-              <Box className="w-8 h-8 rounded-lg bg-[#003087] flex items-center justify-center flex-shrink-0">
-                <Typography component="span" className="text-white font-black text-[9px] tracking-tight">SG</Typography>
-              </Box>
-              <Box>
-                <Typography variant="h2" component="h2" className="text-[11px] font-bold text-ink-950 leading-tight">Saint Gobain glass dealer Coimbatore</Typography>
-                <Typography component="p" className="text-[9px] text-ink-700 font-medium">Authorized Dealer · Since 1977</Typography>
-              </Box>
-            </motion.div>
-
-            {/* Floating: Premium Quality badge */}
-            <motion.div
-              animate={{ y: [4, -4, 4] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute top-6 -right-4 bg-gold text-ink-950 rounded-xl px-4 py-2.5 shadow-lg shadow-gold/25"
-            >
-              <Typography component="p" className="text-[10px] font-bold tracking-wider uppercase">Premium</Typography>
-              <Typography component="p" className="text-[9px] font-medium opacity-85">Quality Glass</Typography>
-            </motion.div>
+          {/* Kicker */}
+          <motion.div {...fadeUp(0.05)}>
+            <div className="inline-flex items-center gap-2.5 mb-7">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 animate-pulse" />
+              <span className="text-[11px] font-bold tracking-[0.24em] uppercase text-gold">
+                Glass Solutions Since 1977 · 3rd Generation Craftsmanship
+              </span>
+            </div>
           </motion.div>
 
-        </Box>
-      </Box>
-    </Box>
+          {/* Heading — word-stagger reveal */}
+          <motion.h1
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+            }}
+            className="font-serif font-bold text-white leading-[1.08] tracking-tight"
+            style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)" }}
+          >
+            {headingWords.map((word, i) => (
+              <motion.span
+                key={i}
+                className="inline-block"
+                variants={{
+                  hidden:  { opacity: 0, y: 28, filter: "blur(4px)" },
+                  visible: { opacity: 1, y: 0,  filter: "blur(0px)", transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+                }}
+              >
+                {word}&nbsp;
+              </motion.span>
+            ))}
+          </motion.h1>
+
+          {/* Gold rule */}
+          <motion.div
+            {...fadeUp(0.45)}
+            className="mt-7 mb-7 h-[2px] w-16 bg-gradient-to-r from-gold via-gold/60 to-transparent rounded-full"
+          />
+
+          {/* Description — static */}
+          <motion.p
+            {...fadeUp(0.3)}
+            className="text-white/70 text-base md:text-[1.05rem] leading-relaxed max-w-xl font-medium"
+          >
+            One-stop glass solution for residential, commercial, and industrial spaces.
+            From site visit to fit &amp; finish — wholesale &amp; retail, supply across South India.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            {...fadeUp(0.4)}
+            className="mt-10 flex flex-col sm:flex-row items-start gap-4"
+          >
+            <Link
+              href="/services"
+              className="group inline-flex items-center gap-2.5 px-8 py-3.5 bg-gold-dark text-white text-[13px] font-bold tracking-[0.12em] uppercase hover:bg-gold transition-colors duration-300 shadow-xl shadow-black/30 hover:-translate-y-0.5 transition-transform"
+            >
+              Explore Services
+              <ArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-1" />
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-8 py-3.5 border border-white/25 text-white/70 text-[13px] font-semibold tracking-wide uppercase hover:border-gold/60 hover:text-gold transition-all duration-300 backdrop-blur-sm bg-white/5"
+            >
+              Get a Quote
+            </Link>
+          </motion.div>
+
+          {/* ── Category Links — Residential & Commercial → /services ── */}
+          <motion.div {...fadeUp(0.55)} className="mt-14">
+            <p className="text-white/35 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
+              Explore by Category
+            </p>
+            <div className="flex gap-3">
+              <Link
+                href="/services"
+                className="flex items-center gap-2 px-6 py-2.5 text-[11px] font-bold tracking-[0.14em] uppercase transition-all duration-300 border backdrop-blur-sm bg-white/5 border-white/15 text-white/55 hover:bg-gold/15 hover:border-gold/60 hover:text-gold"
+              >
+                <Home size={12} />
+                Residential
+              </Link>
+              <Link
+                href="/services"
+                className="flex items-center gap-2 px-6 py-2.5 text-[11px] font-bold tracking-[0.14em] uppercase transition-all duration-300 border backdrop-blur-sm bg-white/5 border-white/15 text-white/55 hover:bg-gold/15 hover:border-gold/60 hover:text-gold"
+              >
+                <Building2 size={12} />
+                Commercial
+              </Link>
+            </div>
+          </motion.div>
+
+        </div>
+      </motion.div>
+
+      {/* ── Stats row — bottom strip ──────────────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.7 }}
+        className="relative z-20 border-t border-white/10 backdrop-blur-sm bg-ink-950/30"
+      >
+        <div className="max-w-4xl mx-auto px-6 py-5 flex items-center justify-center gap-10 md:gap-20">
+          {[
+            { value: "Est. 1977", label: "Serving Since" },
+            { value: "45+",      label: "Years of Craft" },
+            { value: "10k+",     label: "Projects Done" },
+            { value: "100%",     label: "Quality Assured" },
+          ].map((s) => (
+            <div key={s.label} className="flex flex-col items-center">
+              <span className="font-serif font-bold text-gold text-xl leading-none">{s.value}</span>
+              <span className="text-white/40 text-[10px] uppercase tracking-widest mt-1 font-semibold whitespace-nowrap">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* ── Scroll cue ───────────────────────────────────────────── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.4, duration: 0.6 }}
+        className="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 hidden lg:flex flex-col items-center gap-1.5 text-white/25"
+      >
+        <ChevronDown size={15} className="animate-bounce" />
+      </motion.div>
+
+    </section>
   );
 }

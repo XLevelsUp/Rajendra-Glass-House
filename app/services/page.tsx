@@ -10,14 +10,6 @@ import { Box, Typography } from "@mui/material";
 
 const products = [
   {
-    id: "plywoods",
-    title: "Premium Plywoods",
-    subtitle: "Structural Integrity",
-    desc: "Premium grade plywood for durable and aesthetic structural applications.",
-    features: ["Boiling Water Proof (BWP)", "Termite Resistant", "High Load Bearing", "Smooth Surface Finish"],
-    image: "/services/premium-plywoods.webp"
-  },
-  {
     id: "glass-sheets",
     title: "Glass Sheets",
     subtitle: "Crystal Clear Quality",
