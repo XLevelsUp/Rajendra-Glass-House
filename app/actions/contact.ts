@@ -5,7 +5,7 @@ export async function submitContactForm(formData: FormData) {
     name: formData.get("name"),
     email: formData.get("email"),
     phone: formData.get("phone"),
-    service: formData.get("service"),
+    product: formData.get("product"),
     message: formData.get("message"),
   };
 

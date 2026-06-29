@@ -12,8 +12,8 @@ export const MAPS_EMBED = "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d
 export const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Services", href: "/services" },
   { label: "Products", href: "/products" },
+  { label: "Services", href: "/services" },
   { label: "Contact", href: "/contact" },
 ];
 

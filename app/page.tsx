@@ -1,8 +1,9 @@
 import { Hero } from "@/components/sections/Hero";
 import { BrandPartners } from "@/components/sections/BrandPartners";
 import { AboutSnippet } from "@/components/sections/AboutSnippet";
-import { ProductsGrid } from "@/components/sections/ProductsGrid";
+import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
+import { ShowroomVideo } from "@/components/sections/ShowroomVideo";
 import { ProductGallery } from "@/components/sections/ProductGallery";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
@@ -34,8 +35,9 @@ export default function HomePage() {
       <Hero />
       <BrandPartners />
       <AboutSnippet />
-      <ProductsGrid />
+      <ServicesGrid />
       <WhyChooseUs />
+      <ShowroomVideo />
       <ProductGallery />
       <Testimonials />
       <FAQ />

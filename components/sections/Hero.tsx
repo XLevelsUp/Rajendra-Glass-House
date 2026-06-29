@@ -139,10 +139,10 @@ export function Hero() {
             className="mt-10 flex flex-col sm:flex-row items-start gap-4"
           >
             <Link
-              href="/services"
+              href="/products"
               className="group inline-flex items-center gap-2.5 px-8 py-3.5 bg-gold-dark text-white text-[13px] font-bold tracking-[0.12em] uppercase hover:bg-gold transition-colors duration-300 shadow-xl shadow-black/30 hover:-translate-y-0.5 transition-transform"
             >
-              Explore Services
+              Explore Products
               <ArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
             <Link
@@ -160,14 +160,14 @@ export function Hero() {
             </p>
             <div className="flex gap-3">
               <Link
-                href="/services"
+                href="/services?category=residential"
                 className="flex items-center gap-2 px-6 py-2.5 text-[11px] font-bold tracking-[0.14em] uppercase transition-all duration-300 border backdrop-blur-sm bg-white/5 border-white/15 text-white/55 hover:bg-gold/15 hover:border-gold/60 hover:text-gold"
               >
                 <Home size={12} />
                 Residential
               </Link>
               <Link
-                href="/services"
+                href="/services?category=commercial"
                 className="flex items-center gap-2 px-6 py-2.5 text-[11px] font-bold tracking-[0.14em] uppercase transition-all duration-300 border backdrop-blur-sm bg-white/5 border-white/15 text-white/55 hover:bg-gold/15 hover:border-gold/60 hover:text-gold"
               >
                 <Building2 size={12} />

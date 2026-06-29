@@ -13,7 +13,7 @@ export function ContactForm() {
     name: "",
     phone: "",
     email: "",
-    service: "toughened-glass",
+    product: "toughened-glass",
     message: ""
   });
 
@@ -145,11 +145,11 @@ export function ContactForm() {
           {errors.email && <Typography component="p" className="text-red-400 text-xs mt-1">{errors.email}</Typography>}
         </Box>
         <Box className="space-y-2">
-          <label htmlFor="service" className="text-sm font-medium text-gray-300">Service Required</label>
+          <label htmlFor="product" className="text-sm font-medium text-gray-300">Product Required</label>
           <select 
-            id="service" 
-            name="service"
-            value={formData.service}
+            id="product" 
+            name="product"
+            value={formData.product}
             onChange={handleChange}
             className="w-full px-4 py-3 bg-dark-800 border border-dark-600 rounded-lg focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors text-brand-500"
           >
