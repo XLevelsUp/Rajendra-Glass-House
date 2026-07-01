@@ -6,46 +6,40 @@ import { AnimatedContainer } from "@/components/ui/AnimatedContainer";
 interface DemoVideo {
   id: string;
   title: string;
-  webm: string;
   mp4: string;
-  poster: string;
+  poster?: string;
 }
 
 const DEMO_VIDEOS: DemoVideo[] = [
   {
     id: "glass-cutting-operation",
     title: "Glass Cutting Operation",
-    webm: "/video/glass-cutting.webm",
     mp4: "/video/glass-cutting.mp4",
-    poster: "/video/glass-cutting.webp",
+    poster: undefined,
   },
   {
     id: "polishing-glass",
     title: "Glass Polishing",
-    webm: "/video/polishing.webm",
     mp4: "/video/polishing.mp4",
-    poster: "/video/polishing.webp",
+    poster: undefined,
   },
   {
     id: "custom-glass-tracing",
     title: "Custom Glass Tracing",
-    webm: "/video/tracing.webm",
     mp4: "/video/tracing.mp4",
-    poster: "/video/tracing.webp",
+    poster: undefined,
   },
   {
     id: "decorative-glass-making",
     title: "Making of Decorative Glass",
-    webm: "/video/decorative-glass.webm",
     mp4: "/video/decorative-glass.mp4",
-    poster: "/video/decorative-glass.webp",
+    poster: undefined,
   },
   {
     id: "Making of Bend Glass",
     title: "Making of Bend Glass",
-    webm: "/video/bend-glass.webm",
     mp4: "/video/bend-glass.mp4",
-    poster: "/video/blended-glass.webp",
+    poster: undefined,
   },
 ];
 
@@ -56,14 +50,31 @@ export function ShowroomVideo() {
 
   const activeVideo = DEMO_VIDEOS[activeIndex];
 
-  // Auto-play the video when index changes
+  // Load video when index changes, but only play when in viewport
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.load();
-      videoRef.current.play().catch((err) => {
-        console.log("Autoplay was blocked by browser:", err);
-      });
-    }
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.load();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch((err) => {
+              console.log("Autoplay was blocked by browser:", err);
+            });
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(video);
+
+    return () => observer.disconnect();
   }, [activeIndex]);
 
   const handlePrev = () => {
@@ -112,14 +123,13 @@ export function ShowroomVideo() {
               <video
                 ref={videoRef}
                 key={activeVideo.id}
-                autoPlay
+                preload="none"
                 loop
                 muted={isMuted}
                 playsInline
                 className="w-full h-full object-cover"
                 poster={activeVideo.poster}
               >
-                <source src={activeVideo.webm} type="video/webm" />
                 <source src={activeVideo.mp4} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
@@ -167,9 +177,13 @@ export function ShowroomVideo() {
                   key={i}
                   onClick={() => setActiveIndex(i)}
                   aria-label={`Go to video ${i + 1}`}
-                  className={`rounded-full transition-all duration-200 cursor-pointer ${i === activeIndex ? "bg-gold w-6 h-1.5" : "bg-white/20 hover:bg-white/40 w-1.5 h-1.5"
-                    }`}
-                />
+                  className="p-3 cursor-pointer group flex items-center justify-center -mx-1.5"
+                >
+                  <div
+                    className={`rounded-full transition-all duration-200 ${i === activeIndex ? "bg-gold w-6 h-1.5" : "bg-white/20 group-hover:bg-white/40 w-1.5 h-1.5"
+                      }`}
+                  />
+                </button>
               ))}
             </div>
           </div>

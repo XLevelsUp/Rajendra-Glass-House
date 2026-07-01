@@ -18,12 +18,12 @@ export function Footer() {
             <Link href="/" className="inline-block" title="glass house Coimbatore">
               <Typography component="span" className="sr-only">Rajendra glass house Coimbatore</Typography>
               <Image
-                src="/Rajendra_Logo.svg"
+                src="/Rajendra logo dark slate grey.svg"
                 alt="Rajendra glass house Coimbatore"
                 width={160}
                 height={72}
                 className="h-16 md:h-20 w-[240px] md:w-[280px] object-contain object-left"
-                unoptimized/>
+                unoptimized />
             </Link>
             <Typography component="p" className="text-ink-300 text-sm leading-relaxed max-w-xs font-medium">
               Coimbatore&apos;s most trusted glass &amp; mirror specialists since 1977.
@@ -92,11 +92,11 @@ export function Footer() {
             <Typography variant="h3" className="font-bold tracking-[0.15em] text-[10px] uppercase mb-6 text-gold">Our Services</Typography>
             <Box component="ul" className="space-y-3.5">
               {[
-                { label: "Toughened Glass", href: "/services#toughened-glass" },
-                { label: "Shower Enclosures", href: "/services#shower-enclosures" },
-                { label: "Glass Railings", href: "/services#glass-railing" },
-                { label: "Office Partitions", href: "/services#glass-partition" },
-                { label: "LED Smart Mirrors", href: "/services#led-smart-mirrors" },
+                { label: "Frameless Balcony Railing", href: "/services#frameless-balcony-railing" },
+                { label: "Luxury Shower Enclosure", href: "/services#luxury-shower-enclosure" },
+                { label: "Smart LED Mirror", href: "/services#smart-led-mirror" },
+                { label: "Executive Office Partitions", href: "/services#executive-office-partitions" },
+                { label: "Showroom Facade", href: "/services#showroom-facade" },
               ].map(s => (
                 <Box component="li" key={s.href}>
                   <Link href={s.href} className="text-ink-300 hover:text-gold text-sm transition-colors duration-200 font-medium p-2 -m-2 inline-block">

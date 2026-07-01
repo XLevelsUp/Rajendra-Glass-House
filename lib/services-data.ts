@@ -19,6 +19,7 @@ export type Service = {
   description: string;
   specs: Spec[];
   images: string[];
+  imageFit?: "contain" | "cover";
 };
 
 export type FinishingService = {
@@ -44,7 +45,7 @@ export const SERVICES: Service[] = [
       { label: "Finish", value: "Full transparency" },
       { label: "Application", value: "Premium villas, penthouses" },
     ],
-    images: ["/services/glass-railing.webp"],
+    images: ["/services/balcony-glassrailing1.webp", "/services/balcony-glassrailing2.webp"],
   },
   {
     id: "villa-staircase-glass",
@@ -58,7 +59,7 @@ export const SERVICES: Service[] = [
       { label: "Custom Cut", value: "Yes" },
       { label: "Application", value: "Luxury villas" },
     ],
-    images: ["/services/glass-railing.webp"],
+    images: ["/services/staircase-glass1.webp", "/services/staircase-glass2.webp"],
   },
   {
     id: "luxury-shower-enclosure",
@@ -72,7 +73,7 @@ export const SERVICES: Service[] = [
       { label: "Door", value: "Frameless pivot / inline" },
       { label: "Application", value: "Luxury bathrooms, hotels" },
     ],
-    images: ["/services/shower-enclosures.webp"],
+    images: ["/services/shower-enclosure1.webp", "/services/shower-enclosure2.webp"],
   },
   {
     id: "smart-led-mirror",
@@ -86,7 +87,7 @@ export const SERVICES: Service[] = [
       { label: "Custom Size", value: "Yes" },
       { label: "Application", value: "Bathrooms, dressing rooms" },
     ],
-    images: ["/services/led-smart-mirrors.webp"],
+    images: ["/services/led-mirror1.webp", "/services/led-mirror2.webp"],
   },
   {
     id: "gym-mirror-walls",
@@ -100,7 +101,7 @@ export const SERVICES: Service[] = [
       { label: "Fixings", value: "Minimal / frameless" },
       { label: "Application", value: "Home gyms, fitness studios" },
     ],
-    images: ["/services/designer-wall-mirror.webp"],
+    images: ["/services/gym-mirror1.webp", "/services/gym-mirror2.webp"],
   },
   {
     id: "glass-block-feature-wall",
@@ -114,7 +115,7 @@ export const SERVICES: Service[] = [
       { label: "Custom Pattern", value: "Yes" },
       { label: "Application", value: "Feature walls, partitions" },
     ],
-    images: ["/services/glass-blocks.webp"],
+    images: ["/services/glass-block1.webp", "/services/glass-block2.webp", "/services/glass-blocks.webp"],
   },
   {
     id: "lacquered-glass-res",
@@ -128,7 +129,7 @@ export const SERVICES: Service[] = [
       { label: "Applications", value: "Kitchen, wardrobe, wall panels" },
       { label: "Safety", value: "Optional safety backing" },
     ],
-    images: ["/services/decorative-glass.webp"],
+    images: ["/services/lacquered1.webp", "/services/lacquered2.webp"],
   },
   {
     id: "wall-mirror-res",
@@ -142,7 +143,8 @@ export const SERVICES: Service[] = [
       { label: "Lamination", value: "Safety film backing included" },
       { label: "Application", value: "Dining, living rooms, foyers" },
     ],
-    images: ["/services/designer-wall-mirror.webp"],
+    images: ["/services/wall-mirror1.webp", "/services/wall-mirror2.webp", "/services/designer-wall-mirror.webp"],
+    imageFit: "contain",
   },
   {
     id: "glass-pillars-res",
@@ -156,7 +158,8 @@ export const SERVICES: Service[] = [
       { label: "Lighting", value: "Integrated LED compatible" },
       { label: "Application", value: "Pooja rooms, foyer dividers" },
     ],
-    images: ["/services/glass-blocks.webp"],
+    images: ["/services/pillar1.webp", "/services/pillar2.webp"],
+    imageFit: "contain",
   },
   {
     id: "glass-pergola-installation",
@@ -170,7 +173,7 @@ export const SERVICES: Service[] = [
       { label: "Structure", value: "Mild steel / aluminum alloy" },
       { label: "Application", value: "Terraces, porticos, sit-outs" },
     ],
-    images: ["/services/glass-partition.webp"],
+    images: ["/services/perogala1.webp", "/services/perogala2.webp"],
   },
 
   // ─── COMMERCIAL SERVICES ──────────────────────────────────────────────────
@@ -186,7 +189,8 @@ export const SERVICES: Service[] = [
       { label: "Thermal", value: "High insulation" },
       { label: "Application", value: "Office towers, facades" },
     ],
-    images: ["/services/reflective-glass.webp"],
+    images: ["/services/structural-glass1.webp", "/services/structural-glass2.webp"],
+    imageFit: "contain",
   },
   {
     id: "spider-fitting",
@@ -200,7 +204,7 @@ export const SERVICES: Service[] = [
       { label: "Thickness", value: "10 mm – 19 mm" },
       { label: "Application", value: "Showrooms, lobbies" },
     ],
-    images: ["/services/glass-partition.webp"],
+    images: ["/services/spider-fitting1.webp", "/services/spider-fitting2.webp"],
   },
   {
     id: "automatic-sensor-glass",
@@ -214,7 +218,7 @@ export const SERVICES: Service[] = [
       { label: "Frame", value: "Aluminium / SS" },
       { label: "Application", value: "Retail, offices, hospitals" },
     ],
-    images: ["/services/glass-partition.webp"],
+    images: ["/services/sensor-door1.webp"],
   },
   {
     id: "executive-office-partitions",
@@ -228,7 +232,7 @@ export const SERVICES: Service[] = [
       { label: "Glass Options", value: "Clear / frosted / tinted" },
       { label: "Application", value: "Offices, boardrooms" },
     ],
-    images: ["/services/glass-partition.webp"],
+    images: ["/services/office-partition1.webp", "/services/office-partition2.webp"],
   },
   {
     id: "showroom-facade",
@@ -242,7 +246,7 @@ export const SERVICES: Service[] = [
       { label: "UV Control", value: "Solar control coating" },
       { label: "Application", value: "Showrooms, commercial fronts" },
     ],
-    images: ["/services/reflective-glass.webp"],
+    images: ["/services/showroom-facade.webp"],
   },
   {
     id: "hotel-lobby-skylight",
@@ -256,7 +260,7 @@ export const SERVICES: Service[] = [
       { label: "Frame", value: "Aluminium / steel" },
       { label: "Application", value: "Hotels, atriums, malls" },
     ],
-    images: ["/services/floor-glass-sheet.webp"],
+    images: ["/services/lobby-skylight1.webp", "/services/lobby-skylight2.webp"],
   },
   {
     id: "restaurant-glass-partition",

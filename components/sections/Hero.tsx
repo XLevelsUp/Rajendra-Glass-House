@@ -18,10 +18,8 @@ const headingWords = ["Premium", "Glass", "&", "Mirror", "Solutions"];
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
 
-  /* ── Scroll-based parallax ── */
+  /* ── Scroll-based parallax (content + overlay only — image is static for LCP) ── */
   const { scrollY } = useScroll();
-  const imageY          = useTransform(scrollY, [0, 600], ["0%", "18%"]);
-  const imageScale      = useTransform(scrollY, [0, 600], [1, 1.08]);
   const contentY        = useTransform(scrollY, [0, 400], ["0%", "12%"]);
   const overlayOpacity  = useTransform(scrollY, [0, 400], [0, 0.35]);
 
@@ -32,36 +30,22 @@ export function Hero() {
       aria-label="Hero — Rajendra Glass House"
     >
       {/* ══════════════════════════════════════════════════════
-          BACKGROUND: Ken Burns zoom + scroll parallax drift
+          BACKGROUND: CSS Ken Burns only — zero JS dependency, zero LCP penalty
+          Image must NOT be inside any motion.div or will-change wrapper
       ══════════════════════════════════════════════════════ */}
-      <motion.div
-        className="absolute inset-0 will-change-transform"
-        style={{ y: imageY, scale: imageScale }}
-      >
-        <motion.div
-          className="absolute inset-[-6%]"
-          animate={{
-            scale: [1, 1.08, 1],
-            x:     ["0%", "-2.5%", "0%"],
-            y:     ["0%", "-1.5%", "0%"],
-          }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            repeatType: "mirror",
-            ease: "easeInOut",
-          }}
-        >
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-[-6%] hero-kenburns">
           <Image
-            src="/hero.png"
+            src="/hero.webp"
             alt="Premium glass architecture — Rajendra Glass House Coimbatore"
             fill
             priority
+            fetchPriority="high"
             sizes="100vw"
             className="object-cover object-center"
           />
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
       {/* ══════════════════════════════════════════════════════
           GRADIENT OVERLAYS
@@ -88,7 +72,7 @@ export function Hero() {
             <div className="inline-flex items-center gap-2.5 mb-7">
               <span className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0 animate-pulse" />
               <span className="text-[11px] font-bold tracking-[0.24em] uppercase text-gold">
-                Glass Solutions Since 1977 · 3rd Generation Craftsmanship
+                Coimbatore&apos;s Glass Shop Since 1977 · RS Puram, Tamil Nadu
               </span>
             </div>
           </motion.div>
@@ -129,8 +113,8 @@ export function Hero() {
             {...fadeUp(0.3)}
             className="text-white/70 text-base md:text-[1.05rem] leading-relaxed max-w-xl font-medium"
           >
-            One-stop glass solution for residential, commercial, and industrial spaces.
-            From site visit to fit &amp; finish — wholesale &amp; retail, supply across South India.
+            Coimbatore&apos;s best glass shop for toughened glass, shower enclosures, glass railings,
+            office partitions, and LED mirrors — serving residential and commercial spaces across South India.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -140,7 +124,7 @@ export function Hero() {
           >
             <Link
               href="/products"
-              className="group inline-flex items-center gap-2.5 px-8 py-3.5 bg-gold-dark text-white text-[13px] font-bold tracking-[0.12em] uppercase hover:bg-gold transition-colors duration-300 shadow-xl shadow-black/30 hover:-translate-y-0.5 transition-transform"
+              className="group inline-flex items-center gap-2.5 px-8 py-3.5 bg-gold text-ink-950 text-[13px] font-black tracking-[0.12em] uppercase hover:bg-gold-dark transition-colors duration-300 shadow-xl shadow-black/30 hover:-translate-y-0.5 transition-transform"
             >
               Explore Products
               <ArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-1" />

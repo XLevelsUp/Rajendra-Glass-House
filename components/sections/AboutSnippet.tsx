@@ -5,10 +5,10 @@ import Image from "next/image";
 import { Box, Typography } from "@mui/material";
 
 const images = [
-  { src: "/about/lacquered-glass.webp", label: "Lacquered glass", aspect: "aspect-[4/3]", href: "/products" },
-  { src: "/about/groove-mirror-glass.webp", label: "Groove mirror glass", aspect: "aspect-[3/4]", href: "/products" },
-  { src: "/about/glass-pillars.webp", label: "Glass pillars", aspect: "aspect-[4/3] lg:aspect-[16/10]", href: "/products" },
-  { src: "/about/vetropieno-glass-brick.webp", label: "Vetropieno glass brick", aspect: "aspect-[16/9]", href: "/products" },
+  { src: "/about/lacquered-glass.webp", label: "Lacquered glass", aspect: "aspect-[4/3]", href: "/products#lacquered-glass" },
+  { src: "/about/groove-mirror-glass.webp", label: "Groove mirror glass", aspect: "aspect-[3/4]", href: "/products#grooved-mirror" },
+  { src: "/about/glass-pillars.webp", label: "Glass pillars", aspect: "aspect-[4/3] lg:aspect-[16/10]", href: "/products#glass-blocks" },
+  { src: "/about/vetropieno-glass-brick.webp", label: "Vetropieno glass brick", aspect: "aspect-[16/9]", href: "/products#vetropieno-glass-brick" },
 ];
 
 const ImageBlock = ({ img, className = "" }: { img: any, className?: string }) => (
@@ -16,7 +16,7 @@ const ImageBlock = ({ img, className = "" }: { img: any, className?: string }) =
     <Box className={`relative w-full bg-ink-200 overflow-hidden ${img.aspect} group cursor-pointer`}>
       {/* Placeholder Background */}
       <Box className="absolute inset-0 bg-ink-100 flex items-center justify-center p-6 text-center border border-ink-200/60 transition-colors group-hover:bg-ink-100/80">
-        <Typography component="span" className="font-serif text-ink-400 font-medium text-lg capitalize">
+        <Typography component="span" className="font-serif text-ink-600 font-medium text-lg capitalize">
           [Image: {img.label}]
         </Typography>
       </Box>

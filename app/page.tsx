@@ -23,9 +23,17 @@ export const metadata: Metadata = {
     "glass house Coimbatore",
     "glass shop RS Puram",
     "toughened glass",
-    "bathroom mirror",
     "tempered glass",
-    "glass doors Coimbatore"
+    "bathroom mirror",
+    "wall mirror",
+    "glass partition",
+    "shower enclosure",
+    "glass railing",
+    "LED mirror",
+    "float glass",
+    "glass doors Coimbatore",
+    "glass suppliers Tamil Nadu",
+    "custom glass cutting in Coimbatore",
   ],
 };
 

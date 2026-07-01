@@ -145,6 +145,7 @@ export const PRODUCTS: Product[] = [
       { label: "Use Case", value: "Office facades, security" },
     ],
     images: ["/products/oneway-glass1.webp", "/products/oneway-glass2.webp", "/products/oneway-glass3.webp"],
+    imageFit: "contain",
   },
 
   // ── MIRROR ───────────────────────────────────────────────────────────────

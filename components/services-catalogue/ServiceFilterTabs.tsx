@@ -31,7 +31,7 @@ export function ServiceFilterTabs({ active, onChange }: ServiceFilterTabsProps) 
             onClick={() => onChange(tab.id)}
             className={cn(
               "relative flex-shrink-0 px-4 py-3 text-[11px] font-bold tracking-[0.14em] uppercase transition-colors duration-200 cursor-pointer whitespace-nowrap min-h-[44px]",
-              isActive ? "text-ink-950" : "text-ink-400 hover:text-ink-700"
+              isActive ? "text-ink-950" : "text-ink-600 hover:text-ink-700"
             )}
           >
             {tab.label}

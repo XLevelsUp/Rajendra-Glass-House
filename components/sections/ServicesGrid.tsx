@@ -142,7 +142,7 @@ export function ServicesGrid() {
 
                   {/* Placeholder fallback behind the image */}
                   <Box className="absolute inset-0 flex items-center justify-center bg-ink-100 p-2 text-center">
-                    <Typography component="span" className="text-ink-400 text-sm font-medium capitalize">
+                    <Typography component="span" className="text-ink-600 text-sm font-medium capitalize">
                       {service.name}
                     </Typography>
                   </Box>

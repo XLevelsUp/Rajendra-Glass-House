@@ -56,7 +56,7 @@ function CatalogueContent() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.2 }}
-        className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink-400 mt-8 mb-6"
+        className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink-600 mt-8 mb-6"
       >
         {filtered.length} {filtered.length === 1 ? "service" : "services"} found
       </motion.p>
@@ -69,7 +69,7 @@ function CatalogueContent() {
           className="flex flex-col items-center justify-center py-32 gap-4 text-center"
         >
           <SearchX className="w-10 h-10 text-ink-300" />
-          <p className="text-ink-400 font-medium">No services found in this category.</p>
+          <p className="text-ink-600 font-medium">No services found in this category.</p>
           <button
             onClick={() => handleCategoryChange("all")}
             className="text-[11px] font-bold tracking-[0.1em] uppercase text-gold hover:text-gold-dark underline underline-offset-4 transition-colors cursor-pointer"
@@ -96,7 +96,7 @@ function CatalogueContent() {
 export function ServiceCatalogueClient() {
   return (
     <Suspense fallback={
-      <div className="max-w-7xl mx-auto px-4 py-32 text-center text-ink-400 font-medium">
+      <div className="max-w-7xl mx-auto px-4 py-32 text-center text-ink-600 font-medium">
         Loading services catalogue...
       </div>
     }>

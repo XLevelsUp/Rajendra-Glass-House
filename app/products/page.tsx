@@ -3,9 +3,24 @@ import { CatalogueClient } from "@/components/catalogue/CatalogueClient";
 import { FAQ } from "@/components/sections/FAQ";
 
 export const metadata: Metadata = {
-  title: "Glass Products Catalogue | Toughened Glass, Mirrors & More in Coimbatore",
+  title: "Glass Products Catalogue | Toughened Glass, Mirrors, Float Glass & More in Coimbatore",
   description:
-    "Browse Rajendra Glass House's complete glass catalogue — Plain Glass, Mirrors, Pattern Glass, Toughened Safety Glass, Decorative Glass & more. Request a quote instantly.",
+    "Browse Rajendra Glass House's complete glass catalogue in Coimbatore — toughened glass, tempered glass, bathroom mirrors, wall mirrors, float glass, glass doors, LED mirrors, shower enclosures & more. Request a quote instantly.",
+  keywords: [
+    "toughened glass",
+    "tempered glass",
+    "bathroom mirror",
+    "wall mirror",
+    "glass partition",
+    "shower enclosure",
+    "glass railing",
+    "LED mirror",
+    "float glass",
+    "glass doors Coimbatore",
+    "glass suppliers Tamil Nadu",
+    "custom glass cutting in Coimbatore",
+    "glass shop in Coimbatore",
+  ],
   alternates: { canonical: "/products" },
 };
 
@@ -35,7 +50,7 @@ export default function ProductsPage() {
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-px bg-gold" />
             <span className="text-[10px] font-black tracking-[0.35em] uppercase text-gold">
-              Glass Products Catalogue
+              Glass Products in Coimbatore
             </span>
           </div>
 
@@ -58,7 +73,7 @@ export default function ProductsPage() {
                 </span>
               </h1>
               <p className="text-ink-500 text-[0.9375rem] font-medium mt-4 max-w-lg leading-relaxed">
-                Architectural glass for every application — crafted with precision, installed with care.
+                From toughened glass and tempered glass to bathroom mirrors, LED mirrors, float glass, glass doors, and custom glass cutting — everything you need, crafted and installed with care.
               </p>
             </div>
 

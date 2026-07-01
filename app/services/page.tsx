@@ -6,9 +6,19 @@ import { FAQ } from "@/components/sections/FAQ";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Glass Installation Services | Residential & Commercial Coimbatore",
+  title: "Glass Installation Services in Coimbatore | Toughened Glass, Shower Enclosures & Glass Railing",
   description:
-    "Explore Rajendra Glass House services — Staircase railings, shower enclosures, partitions, automatic sensor glass, structural glazing & custom glass finishing.",
+    "Explore Rajendra Glass House's installation services in Coimbatore — custom glass cutting, shower enclosures, glass railings, staircase glass, structural glazing, office partitions & more. Free site visits included.",
+  keywords: [
+    "glass installation Coimbatore",
+    "custom glass cutting in Coimbatore",
+    "shower enclosure",
+    "glass railing",
+    "glass partition",
+    "toughened glass",
+    "glass suppliers Tamil Nadu",
+    "glass shop in Coimbatore",
+  ],
   alternates: { canonical: "/services" },
 };
 
@@ -57,7 +67,7 @@ export default function ServicesPage() {
                 </span>
               </h1>
               <p className="text-ink-500 text-[0.9375rem] font-medium mt-4 max-w-lg leading-relaxed">
-                Expert site visits, precise measurements, and flawless fit &amp; finish included with every installation.
+                Precision installation for every glass project — from custom glass cutting and shower enclosures to structural glazing and glass railings. Free site visits included with every service.
               </p>
             </div>
 

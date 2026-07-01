@@ -47,7 +47,7 @@ export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
       className="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-ink-950/10 transition-shadow duration-300 border border-ink-100"
     >
       {/* ── Image ──────────────────────────────────────────────── */}
-      <div className="relative aspect-square overflow-hidden bg-ink-100">
+      <div className={`relative aspect-square overflow-hidden ${service.imageFit === "contain" ? "bg-white p-4" : "bg-ink-100"}`}>
         <AnimatePresence mode="wait">
           <motion.div
             key={imgIndex}
@@ -62,7 +62,7 @@ export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
               alt={`${service.name} – Rajendra Glass House`}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              className={`transition-transform duration-700 ease-out group-hover:scale-[1.04] ${service.imageFit === "contain" ? "object-contain p-4" : "object-cover"}`}
               priority={index < 4}
             />
           </motion.div>
@@ -103,12 +103,16 @@ export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
                 key={i}
                 onClick={(e) => { e.stopPropagation(); setImgIndex(i); }}
                 aria-label={`Go to image ${i + 1}`}
-                className={`rounded-full transition-all duration-200 cursor-pointer ${
-                  i === imgIndex
-                    ? "bg-white w-5 h-1.5 shadow-sm"
-                    : "bg-white/60 hover:bg-white/90 w-1.5 h-1.5"
-                }`}
-              />
+                className="p-3 cursor-pointer group flex items-center justify-center -mx-1.5"
+              >
+                <div
+                  className={`rounded-full transition-all duration-200 ${
+                    i === imgIndex
+                      ? "bg-white w-5 h-1.5 shadow-sm"
+                      : "bg-white/60 group-hover:bg-white/90 w-1.5 h-1.5"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         )}
@@ -143,7 +147,7 @@ export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
                 i < service.specs.length - 1 ? "border-b border-ink-100" : ""
               }`}
             >
-              <span className="text-ink-400 font-medium">{spec.label}</span>
+              <span className="text-ink-600 font-medium">{spec.label}</span>
               <span className="text-ink-800 font-bold text-right ml-6 leading-snug">{spec.value}</span>
             </div>
           ))}
