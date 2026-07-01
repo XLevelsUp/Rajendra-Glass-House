@@ -44,7 +44,7 @@ export function Header() {
           <Link href="/" className="flex-shrink-0" title="glass house Coimbatore">
             <Typography component="span" className="sr-only">Rajendra glass house Coimbatore</Typography>
             <Image
-              src="/Rajendra_Logo.svg"
+              src={isHeaderSolid ? "/Rajendra logo off-white.svg" : "/Rajendra logo dark slate grey.svg"}
               alt="Rajendra glass house Coimbatore"
               width={512}
               height={512}

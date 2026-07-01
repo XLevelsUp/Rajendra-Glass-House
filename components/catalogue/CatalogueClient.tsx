@@ -49,7 +49,7 @@ export function CatalogueClient() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.2 }}
-        className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink-400 mt-8 mb-6"
+        className="text-[11px] font-bold tracking-[0.14em] uppercase text-ink-600 mt-8 mb-6"
       >
         {filtered.length} {filtered.length === 1 ? "product" : "products"}
       </motion.p>
@@ -62,7 +62,7 @@ export function CatalogueClient() {
           className="flex flex-col items-center justify-center py-32 gap-4 text-center"
         >
           <SearchX className="w-10 h-10 text-ink-300" />
-          <p className="text-ink-400 font-medium">No products in this category yet.</p>
+          <p className="text-ink-600 font-medium">No products in this category yet.</p>
           <button
             onClick={() => handleCategoryChange("all")}
             className="text-[11px] font-bold tracking-[0.1em] uppercase text-gold hover:text-gold-dark underline underline-offset-4 transition-colors cursor-pointer"

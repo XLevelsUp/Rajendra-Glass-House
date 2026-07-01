@@ -169,3 +169,14 @@
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
+/* Hero background Ken Burns — CSS-only (no JS, no LCP penalty) */
+@keyframes hero-kenburns {
+  0%   { transform: scale(1)    translate(0%,  0%); }
+  50%  { transform: scale(1.08) translate(-2.5%, -1.5%); }
+  100% { transform: scale(1)    translate(0%,  0%); }
+}
+
+.hero-kenburns {
+  animation: hero-kenburns 22s ease-in-out infinite;
+}

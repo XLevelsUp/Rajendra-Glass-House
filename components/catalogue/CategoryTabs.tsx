@@ -35,7 +35,7 @@ export function CategoryTabs({ categories, active, onChange }: CategoryTabsProps
               "relative flex-shrink-0 px-5 py-3 text-[11px] font-bold tracking-[0.14em] uppercase transition-colors duration-200 cursor-pointer whitespace-nowrap min-h-[44px]",
               isActive
                 ? "text-ink-950"
-                : "text-ink-400 hover:text-ink-700"
+                : "text-ink-600 hover:text-ink-700"
             )}
           >
             {tab.label}

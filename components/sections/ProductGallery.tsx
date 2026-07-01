@@ -10,11 +10,11 @@ import { Box, Typography } from "@mui/material";
 
 
 const projects = [
-  { id: 1, title: "Frameless Balcony Railing", category: "Residential", location: "RS Puram", image: "/services/glass-railing.webp" },
+  { id: 1, title: "Frameless Balcony Railing", category: "Residential", location: "RS Puram", image: "/services/balcony-glassrailing1.webp" },
   { id: 2, title: "Showroom Facade", category: "Commercial", location: "Avinashi Road", image: "/services/reflective-glass.webp" },
   { id: 3, title: "Luxury Shower Enclosure", category: "Residential", location: "Race Course", image: "/services/shower-enclosures.webp" },
   { id: 4, title: "Executive Office Partitions", category: "Commercial", location: "Trichy Road", image: "/services/glass-partition.webp" },
-  { id: 5, title: "Villa Staircase Glass", category: "Residential", location: "Vadavalli", image: "/services/glass-railing.webp" },
+  { id: 5, title: "Villa Staircase Glass", category: "Residential", location: "Vadavalli", image: "/services/staircase-glass1.webp" },
   { id: 6, title: "Hotel Lobby Skylight", category: "Commercial", location: "Gandhipuram", image: "/services/floor-glass-sheet.webp" },
 ];
 
@@ -95,13 +95,13 @@ export function ProductGallery() {
 
                   {/* Body content */}
                   <div className="p-6 flex flex-col flex-1">
-                    <span className="text-[10px] font-bold tracking-widest text-ink-400 uppercase mb-1">
+                    <span className="text-[10px] font-bold tracking-widest text-ink-600 uppercase mb-1">
                       {p.location}
                     </span>
                     <h3 className="font-serif text-[1.125rem] font-bold text-ink-950 leading-snug tracking-tight mb-4 group-hover:text-gold transition-colors duration-250">
                       {p.title}
                     </h3>
-                    <div className="mt-auto flex items-center gap-2 text-[10px] font-black tracking-widest uppercase text-gold group-hover:text-gold-dark transition-colors">
+                    <div className="mt-auto flex items-center gap-2 text-[10px] font-black tracking-widest uppercase text-ink-900 group-hover:text-ink-600 transition-colors">
                       Learn More
                       <ArrowRight size={12} className="transition-transform duration-200 group-hover:translate-x-1" />
                     </div>
