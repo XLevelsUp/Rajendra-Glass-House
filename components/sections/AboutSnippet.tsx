@@ -22,7 +22,7 @@ const ImageBlock = ({ img, className = "" }: { img: any, className?: string }) =
       </Box>
 
       {/* Actual Image Tag */}
-      <Image src={img.src} alt={img.label} fill className="object-cover relative z-10" /> 
+      <Image src={img.src} alt={img.label} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 650px" className="object-cover relative z-10" /> 
 
       {/* Plus Icon Overlay - Removed as requested */}
     </Box>

@@ -55,8 +55,6 @@ export function ShowroomVideo() {
     const video = videoRef.current;
     if (!video) return;
 
-    video.load();
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -131,6 +129,7 @@ export function ShowroomVideo() {
                 poster={activeVideo.poster}
               >
                 <source src={activeVideo.mp4} type="video/mp4" />
+                <track kind="captions" srcLang="en" label="English" default={false} />
                 Your browser does not support the video tag.
               </video>
 

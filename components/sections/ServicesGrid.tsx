@@ -113,6 +113,7 @@ export function ServicesGrid() {
               onClick={() => scroll("left")}
               className="bg-ink-100 hover:bg-gold hover:text-ink-950 transition-colors duration-300"
               size="large"
+              aria-label="Previous slide"
             >
               <ChevronLeft size={24} />
             </IconButton>
@@ -120,6 +121,7 @@ export function ServicesGrid() {
               onClick={() => scroll("right")}
               className="bg-ink-100 hover:bg-gold hover:text-ink-950 transition-colors duration-300"
               size="large"
+              aria-label="Next slide"
             >
               <ChevronRight size={24} />
             </IconButton>
